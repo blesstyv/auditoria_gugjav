@@ -17,12 +17,9 @@
 
 ## 2. Contexto de la empresa
 
-Inmobiliaria Terranova es una empresa ficticia perteneciente al rubro inmobiliario. Su actividad principal se relaciona con la gestión de propiedades, atención de clientes, administración de contratos y seguimiento de procesos asociados a compra, venta, arriendo o financiamiento inmobiliario.
+Inmobiliaria Terranova es una empresa perteneciente al rubro inmobiliario. Su actividad principal se relaciona con la gestión de propiedades, atención de clientes, administración de contratos y seguimiento de procesos asociados a compra, venta, arriendo o financiamiento inmobiliario.
 
 Dentro de su operación digital, la empresa cuenta con un portal de clientes que permite centralizar información relevante para sus usuarios. Este portal es considerado un sistema crítico, debido a que puede almacenar, consultar o gestionar información contractual, financiera y personal de los clientes.
-
-En el contexto de esta auditoría, el portal de clientes representa el principal sistema evaluado, ya que concentra activos de información sensibles para el negocio inmobiliario.
-
 
 ## 3. Portal de clientes auditado
 
@@ -149,65 +146,11 @@ Los objetivos específicos de esta auditoría son:
 10. Definir medidas de recuperación ante incidentes y continuidad operacional.
 11. Presentar el informe mediante una aplicación web React desplegada en Vercel.
 
-## 8. Alcance de la auditoría
-
-La auditoría se realiza exclusivamente en un ambiente controlado y autorizado, utilizando la aplicación deliberadamente vulnerable DVWA.
-
-El análisis se enfoca en tres vulnerabilidades web:
-
-* Inyección SQL.
-* Cross-Site Scripting reflejado.
-* Inyección de comandos.
-
-La explotación técnica se realiza sobre DVWA, pero el análisis de impacto, riesgo y controles se contextualiza en la empresa ficticia Inmobiliaria Terranova y su portal de clientes.
-
-### 8.1 Incluye
-
-Esta auditoría incluye:
-
-* Pruebas controladas sobre DVWA.
-* Evidencia visual de los ataques.
-* Análisis técnico de cada vulnerabilidad.
-* Evaluación de gravedad mediante CVSS.
-* Identificación de activos de información.
-* Matriz de riesgo.
-* Recomendaciones de prevención.
-* Controles de mitigación.
-* Plan de recuperación post incidente.
-* Bitácora de uso de inteligencia artificial.
-
-### 8.2 No incluye
-
-Esta auditoría no incluye:
-
-* Ataques a sistemas reales.
-* Pruebas sobre portales externos.
-* Acceso a datos reales de clientes.
-* Explotación fuera del laboratorio autorizado.
-* Obtención o uso de información confidencial real.
-* Acciones que afecten infraestructura de terceros.
-
-
-
 ## 9. Ambiente controlado de pruebas
 
 Para el desarrollo de la evaluación se utiliza DVWA, una aplicación web diseñada para practicar conceptos de seguridad en un entorno controlado.
 
-DVWA permite simular vulnerabilidades de forma segura y documentar evidencias sin afectar sistemas reales. En esta auditoría, la explotación se realiza únicamente con fines académicos y defensivos.
-
-Las pruebas se realizan con el nivel de seguridad configurado en Low, según las instrucciones de la evaluación, para poder observar el funcionamiento básico de las vulnerabilidades y comprender su impacto.
-
-
-
-## 10. Marco ético de la auditoría
-
-Esta auditoría se desarrolla bajo un marco ético y académico. Las técnicas utilizadas tienen como finalidad comprender vulnerabilidades, medir riesgos y proponer controles defensivos.
-
-Las pruebas de seguridad solo deben ejecutarse en sistemas propios, autorizados o en ambientes especialmente preparados para aprendizaje, como DVWA.
-
-Atacar sistemas reales o ajenos sin autorización puede constituir una conducta ilegal y contraria a la ética profesional. Por ello, todas las pruebas de este informe se limitan estrictamente al ambiente controlado definido para la evaluación.
-
-
+DVWA permite simular vulnerabilidades de forma segura y documentar evidencias sin afectar sistemas reales.
 
 ## 11. Vulnerabilidades consideradas
 
@@ -241,91 +184,3 @@ Antes de desarrollar el análisis detallado de activos en el archivo correspondi
 | Registros de actividad             | Permiten monitorear accesos, errores e incidentes.                          |
 | Documentos asociados a propiedades | Respaldan procesos administrativos y comerciales.                           |
 
-
-## 13. Riesgos preliminares del negocio
-
-En una empresa inmobiliaria, los riesgos de seguridad web deben evaluarse según el daño que podrían causar sobre los activos del negocio.
-
-Algunos riesgos preliminares son:
-
-* Acceso no autorizado a contratos de clientes.
-* Exposición de datos financieros.
-* Robo o reutilización de credenciales.
-* Modificación de registros de pago o estados contractuales.
-* Pérdida de disponibilidad del portal.
-* Daño reputacional.
-* Pérdida de confianza de clientes.
-* Posibles consecuencias legales por exposición de datos personales.
-* Interrupción de procesos de venta, arriendo o atención al cliente.
-
-
-## 14. Criterio de análisis de riesgo
-
-El análisis de riesgo se realizará considerando la relación entre probabilidad e impacto.
-
-La fórmula base utilizada será:
-
-```text
-Riesgo = Probabilidad × Impacto
-```
-
-La probabilidad se relaciona con qué tan factible es que una vulnerabilidad sea explotada. El impacto se relaciona con el daño que la explotación puede causar sobre los activos de Inmobiliaria Terranova.
-
-Esta relación permitirá priorizar los hallazgos y decidir qué vulnerabilidades deben corregirse primero.
-
-
-## 15. Criterios preliminares de impacto
-
-Para esta auditoría se consideran los siguientes criterios de impacto:
-
-### Impacto bajo
-
-La vulnerabilidad afecta información limitada, no crítica o sin consecuencias relevantes para la operación inmobiliaria.
-
-### Impacto medio
-
-La vulnerabilidad afecta información interna o procesos secundarios, pero no compromete directamente contratos, datos financieros o continuidad del portal.
-
-### Impacto alto
-
-La vulnerabilidad puede comprometer datos personales, credenciales, documentos relevantes o procesos importantes del portal de clientes.
-
-### Impacto crítico
-
-La vulnerabilidad puede exponer contratos, datos financieros, base de datos completa, afectar el servidor o interrumpir la operación del portal de clientes.
-
----
-
-
-### 16.2 Aplicación React
-
-La aplicación React presenta el contenido del informe de forma navegable. Cada sección del sitio corresponde a un componente que resume y visualiza el contenido del informe, incluyendo capturas de ataques, análisis de riesgo y matriz visual.
-
----
-
-## 17. Criterio de calidad esperado
-
-Para que la auditoría tenga valor, no basta con demostrar que un ataque funciona en DVWA. Cada hallazgo debe conectarse con el negocio de Inmobiliaria Terranova.
-
-Por ello, cada vulnerabilidad debe analizarse considerando:
-
-* Qué activo se ve afectado.
-* Qué amenaza podría explotarla.
-* Qué impacto tendría para la empresa.
-* Qué tan probable es su explotación.
-* Qué nivel de riesgo representa.
-* Qué controles permiten prevenirla.
-* Qué medidas permiten mitigar el daño.
-* Qué acciones deben ejecutarse después de un incidente.
-
----
-
-## 18. Resumen final
-
-Esta auditoría evalúa vulnerabilidades web en un ambiente controlado, tomando como contexto de negocio a Inmobiliaria Terranova y su portal de clientes.
-
-La empresa custodia información crítica, como contratos, datos financieros, datos personales y credenciales de acceso. Debido a esto, vulnerabilidades como Inyección SQL, XSS reflejado e Inyección de comandos pueden representar riesgos significativos para la confidencialidad, integridad y disponibilidad de la información.
-
-El trabajo permitirá transformar hallazgos técnicos en riesgos de negocio, priorizarlos mediante una matriz de riesgo y proponer medidas concretas de prevención, mitigación y recuperación.
-
-El enfoque de esta auditoría es estrictamente académico, ético y defensivo.
