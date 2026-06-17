@@ -2,7 +2,7 @@
 
 ## Inmobiliaria Terranova — Portal de clientes
 
-## 2. Resumen del hallazgo
+## 1. Resumen del hallazgo
 
 Se evaluó la vulnerabilidad **Cross-Site Scripting reflejado**, también conocida como **XSS Reflected**. La prueba permitió demostrar cómo una aplicación vulnerable puede recibir una entrada del usuario y devolverla en la respuesta HTML sin validarla, sanitizarla o codificarla correctamente.
 
@@ -10,13 +10,13 @@ En el contexto de Inmobiliaria Terranova, una vulnerabilidad de XSS reflejado en
 
 Aunque el XSS reflejado no compromete directamente la base de datos como una Inyección SQL, sí representa un riesgo importante porque ataca la interacción entre el usuario y el portal. En una plataforma inmobiliaria donde los clientes consultan contratos, estados de pago y antecedentes financieros, la manipulación del navegador puede tener consecuencias relevantes para la confidencialidad, integridad de la interacción y reputación institucional.
 
-## 3. ¿Qué es XSS reflejado?
+## 2. ¿Qué es XSS reflejado?
 
 El XSS reflejado es una vulnerabilidad web que ocurre cuando una aplicación recibe datos desde una solicitud del usuario y los devuelve inmediatamente en la página de respuesta sin aplicar controles adecuados.
 
 En una aplicación segura, cualquier dato ingresado por el usuario debe tratarse como contenido no confiable. El problema aparece cuando la aplicación inserta ese dato dentro del HTML de respuesta y el navegador lo interpreta como código ejecutable.
 
-## 5. Causa raíz de la vulnerabilidad
+## 3. Causa raíz de la vulnerabilidad
 
 La causa raíz del XSS reflejado es la falta de control sobre los datos que la aplicación recibe y devuelve al navegador.
 
@@ -39,9 +39,8 @@ La falla no está solamente en que el usuario pueda escribir código, sino en qu
 * Falta de revisión de seguridad en formularios, parámetros de URL o mensajes reflejados.
 * Confianza excesiva en la entrada enviada por el usuario.
 
----
 
-## 6. Puntos de entrada donde puede aparecer
+## 4. Puntos de entrada donde puede aparecer
 
 En el portal de clientes de Inmobiliaria Terranova, una vulnerabilidad XSS reflejada podría aparecer en cualquier funcionalidad donde la aplicación reciba un dato y lo muestre nuevamente en pantalla.
 
@@ -91,11 +90,11 @@ Toda entrada del usuario debe considerarse no confiable.
 
 La aplicación no debe insertar directamente datos del usuario en la página sin aplicar controles de salida adecuados según el contexto donde serán mostrados.
 
-## 9. Impacto en Inmobiliaria Terranova
+## 5. Impacto en Inmobiliaria Terranova
 
 El impacto de XSS reflejado se analiza según los tres pilares de la seguridad de la información: confidencialidad, integridad y disponibilidad.
 
-### 9.1 Confidencialidad
+### 5.1 Confidencialidad
 
 La confidencialidad puede verse afectada si el atacante logra ejecutar código en el navegador del cliente y acceder a información visible dentro de la sesión del usuario.
 
@@ -110,7 +109,7 @@ En Inmobiliaria Terranova, esto podría afectar:
 
 El riesgo aumenta si el portal no aplica controles adecuados de sesión, cabeceras de seguridad o protección contra lectura indebida de datos del cliente.
 
-### 9.2 Integridad
+### 5.2 Integridad
 
 La integridad puede verse afectada porque el código ejecutado en el navegador podría modificar la forma en que el usuario visualiza la página.
 
@@ -125,7 +124,7 @@ En el contexto del portal, esto podría permitir:
 
 Aunque el XSS reflejado no modifica necesariamente la base de datos, sí puede alterar la interacción del usuario con el sistema.
 
-### 9.3 Disponibilidad
+### 5.3 Disponibilidad
 
 El impacto sobre disponibilidad suele ser menor que en otros ataques. Sin embargo, puede existir afectación parcial si el código ejecutado interrumpe la navegación, bloquea componentes visuales o degrada la experiencia del usuario.
 
@@ -136,7 +135,7 @@ En el portal de Inmobiliaria Terranova, esto podría causar:
 * Interrupción de consultas.
 * Pérdida de confianza en el uso del portal.
 
-## 10. Activos afectados
+## 6. Activos afectados
 
 Los principales activos afectados por este hallazgo son:
 
@@ -149,7 +148,7 @@ Los principales activos afectados por este hallazgo son:
 | Confianza institucional    | Percepción de seguridad y seriedad de la empresa.                   | Alto                |
 | Imagen corporativa         | Reputación digital de la inmobiliaria frente a clientes.            | Alto                |
 
-## 11. Amenaza asociada
+## 7. Amenaza asociada
 
 La amenaza asociada corresponde a un atacante que busca ejecutar código en el navegador de un usuario del portal mediante una entrada o enlace manipulado.
 
@@ -161,7 +160,7 @@ Posibles actores de amenaza:
 * Actor que intenta manipular formularios o mensajes visibles.
 * Atacante que busca afectar la confianza en la plataforma.
 
-## 12. Evaluación de gravedad mediante CVSS v3.1
+## 8. Evaluación de gravedad mediante CVSS v3.1
 
 Para estimar la gravedad del hallazgo se utiliza CVSS v3.1, considerando que se trata de un XSS reflejado en un portal web de clientes.
 
@@ -199,7 +198,7 @@ La severidad técnica se clasifica como **Media**.
 Aunque el puntaje CVSS técnico es medio, el riesgo para Inmobiliaria Terranova puede ser **alto** si el XSS se aprovecha en secciones donde los clientes consultan contratos, datos financieros o información personal. Esto se debe a que la explotación puede afectar la confianza del cliente, la privacidad de la sesión y la integridad de la experiencia dentro del portal.
 
 
-## 13. Nivel de riesgo para Inmobiliaria Terranova
+## 9. Nivel de riesgo para Inmobiliaria Terranova
 
 El riesgo se estima considerando:
 
@@ -233,7 +232,7 @@ La vulnerabilidad debe corregirse con alta prioridad, especialmente si se encuen
 
 ---
 
-## 14. Política de prevención propuesta
+## 10. Política de prevención propuesta
 
 ### Política: Control de entradas y codificación segura de salida
 
@@ -254,7 +253,7 @@ La política debe establecer que ningún dato recibido desde formularios, parám
 9. Todo cambio en vistas o componentes que rendericen datos del usuario debe pasar por revisión de seguridad.
 10. Se deben realizar pruebas específicas de XSS en formularios, filtros, mensajes y parámetros de URL.
 
-## 15. Control de mitigación propuesto
+## 11. Control de mitigación propuesto
 
 ### Control principal
 
@@ -264,7 +263,7 @@ Aplicar codificación de salida contextual en todo contenido generado con datos 
 
 La codificación de salida convierte caracteres potencialmente interpretables como código en representaciones seguras para el navegador. Esto permite que el contenido se muestre como texto y no como instrucciones ejecutables.
 
-## 16. Ejemplo de corrección segura
+## 12. Ejemplo de corrección segura
 
 Una práctica insegura es insertar directamente datos del usuario dentro de una página HTML.
 
@@ -292,7 +291,7 @@ En frameworks modernos, se deben evitar funciones que inserten HTML sin control.
 * Actividad anómala en sesiones de clientes.
 * Repetición de solicitudes con payloads similares.
 
-## 18. Actos a seguir posterior al ataque
+## 13. Actos a seguir posterior al ataque
 
 Se recomienda aplicar el siguiente plan de remediación:
 
@@ -307,7 +306,7 @@ Se recomienda aplicar el siguiente plan de remediación:
 9. Ejecutar pruebas de seguridad para confirmar que el payload ya no se ejecuta.
 10. Documentar la corrección y actualizar la política de desarrollo seguro.
 
-## 19. Medidas posteriores si el ataque ocurre
+## 14. Medidas posteriores si el ataque ocurre
 
 Si se detecta explotación real de XSS reflejado en el portal de clientes, la empresa debe aplicar un proceso de respuesta.
 
@@ -325,7 +324,7 @@ Si se detecta explotación real de XSS reflejado en el portal de clientes, la em
 10. Notificar a clientes si corresponde por posible afectación de datos.
 11. Documentar lecciones aprendidas y mejorar controles de desarrollo seguro.
 
-## 20. Conclusión del hallazgo
+## 15. Conclusión del hallazgo
 
 El XSS reflejado representa un hallazgo de severidad técnica media, pero con riesgo alto para Inmobiliaria Terranova debido al tipo de información que sus clientes consultan en el portal.
 
@@ -335,7 +334,7 @@ La medida preventiva más importante es aplicar codificación de salida contextu
 
 Este hallazgo debe corregirse con alta prioridad en cualquier sección del portal donde se refleje información ingresada por usuarios, especialmente en módulos relacionados con búsqueda de contratos, estados financieros, formularios de contacto o mensajes del sistema.
 
-## 21. Fuentes de apoyo utilizadas
+## 16. Fuentes de apoyo utilizadas
 
 * OWASP — Cross-Site Scripting Prevention Cheat Sheet.
 * OWASP — Web Security Testing Guide: Testing for Reflected Cross Site Scripting.

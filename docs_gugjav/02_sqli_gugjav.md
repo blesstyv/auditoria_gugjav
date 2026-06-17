@@ -2,19 +2,19 @@
 
 ## Inmobiliaria Terranova — Portal de clientes
 
-## 2. Resumen ejecutivo del hallazgo
+## 1. Resumen ejecutivo del hallazgo
 
 Se evaluó la vulnerabilidad de **Inyección SQL** en un ambiente controlado. La prueba permitió demostrar cómo una entrada manipulada puede alterar la lógica de una consulta SQL cuando una aplicación no separa correctamente los datos ingresados por el usuario de las instrucciones enviadas a la base de datos.
 
 En el contexto de Inmobiliaria Terranova, este hallazgo representa un riesgo crítico porque el portal de clientes administra información confidencial para el negocio inmobiliario, especialmente contratos y datos financieros de clientes. Si una vulnerabilidad de este tipo existiera en el portal productivo, un atacante podría acceder a información confidencial, visualizar registros no autorizados, comprometer credenciales o afectar la integridad de datos vinculados a procesos de compra, venta, arriendo o financiamiento.
 
-## 3. ¿Qué es una Inyección SQL?
+## 2. ¿Qué es una Inyección SQL?
 
 La Inyección SQL es una vulnerabilidad de aplicación web que ocurre cuando una aplicación construye consultas a la base de datos usando datos ingresados por el usuario sin aplicar controles adecuados.
 
 En una aplicación segura, lo que escribe el usuario debe ser tratado únicamente como dato. El problema aparece cuando esa entrada se incorpora directamente dentro de una instrucción SQL y puede modificar su estructura o comportamiento.
 
-## 4. Causa raíz de la vulnerabilidad
+## 3. Causa raíz de la vulnerabilidad
 
 La causa raíz de la Inyección SQL es la mezcla insegura entre:
 
@@ -39,7 +39,7 @@ Por ejemplo, una aplicación vulnerable podría tomar un valor ingresado en un f
 
 
 
-## 5. Puntos de entrada donde puede aparecer
+## 4. Puntos de entrada donde puede aparecer
 
 En un portal de clientes inmobiliario, la Inyección SQL podría aparecer en distintos puntos de entrada, especialmente en aquellos que reciben datos desde el usuario y consultan una base de datos.
 
@@ -56,7 +56,7 @@ Algunos puntos de riesgo son:
 
 
 
-## 6. Evidencia del ataque en ambiente controlado
+## 5. Evidencia del ataque en ambiente controlado
 
 La prueba se realizó en DVWA, específicamente en el módulo **SQL Injection**, con el nivel de seguridad configurado en **Low**.
 
@@ -88,11 +88,11 @@ Nunca confiar automáticamente en los datos ingresados por el usuario.
 
 Toda entrada debe ser validada, controlada y separada de las instrucciones que ejecuta el sistema.
 
-## 8. Tipos de impacto en Inmobiliaria Terranova
+## 6. Tipos de impacto en Inmobiliaria Terranova
 
 La Inyección SQL puede afectar directamente la triada de la seguridad de la información: confidencialidad, integridad y disponibilidad.
 
-### 8.1 Confidencialidad
+### 6.1 Confidencialidad
 
 La confidencialidad se ve afectada cuando un usuario no autorizado logra visualizar información privada o reservada.
 
@@ -110,7 +110,7 @@ En Inmobiliaria Terranova, esto podría incluir:
 
 Este es el impacto más relevante del hallazgo, porque el portal custodia información sensible para clientes y para la operación inmobiliaria.
 
-### 8.2 Integridad
+### 6.2 Integridad
 
 La integridad se ve afectada cuando los datos pueden ser modificados, alterados o eliminados sin autorización.
 
@@ -125,7 +125,7 @@ En el contexto de la empresa, una explotación más avanzada podría afectar:
 
 La alteración de estos datos puede provocar errores administrativos, conflictos con clientes, problemas legales o pérdida de validez de registros internos.
 
-### 8.3 Disponibilidad
+### 6.3 Disponibilidad
 
 La disponibilidad se ve afectada cuando el sistema o la información dejan de estar accesibles para usuarios autorizados.
 
@@ -139,7 +139,7 @@ En una explotación grave, una Inyección SQL podría contribuir a:
 
 
 
-## 9. Activos afectados
+## 7. Activos afectados
 
 Los principales activos afectados por este hallazgo son:
 
@@ -155,7 +155,7 @@ Los principales activos afectados por este hallazgo son:
 
 
 
-## 10. Amenaza asociada
+## 8. Amenaza asociada
 
 La amenaza asociada corresponde a un actor que intenta manipular entradas del portal para obtener acceso no autorizado a información almacenada en la base de datos.
 
@@ -169,7 +169,7 @@ Posibles actores de amenaza:
 
 
 
-## 11. Evaluación de gravedad mediante CVSS v3.1
+## 9. Evaluación de gravedad mediante CVSS v3.1
 
 Para estimar la gravedad del hallazgo se utiliza CVSS v3.1. La evaluación se realiza considerando el contexto del portal de clientes de Inmobiliaria Terranova, donde la base de datos puede contener contratos y datos financieros.
 
@@ -202,7 +202,7 @@ CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L
 
 La severidad se clasifica como **Alta**, debido a que la vulnerabilidad puede comprometer información crítica para el negocio inmobiliario y afectar directamente datos de clientes.
 
-## 12. Nivel de riesgo para Inmobiliaria Terranova
+## 10. Nivel de riesgo para Inmobiliaria Terranova
 
 El riesgo se estima considerando:
 
@@ -220,7 +220,7 @@ La probabilidad se considera alta porque la vulnerabilidad se encuentra en una a
 **Crítico.**
 El impacto se considera crítico porque el portal custodia contratos y datos financieros de clientes. La exposición, modificación o eliminación de esta información puede generar consecuencias legales, económicas, operacionales y reputacionales.
 
-## 13. Política de prevención propuesta
+## 11. Política de prevención propuesta
 
 ### Política: Desarrollo seguro y prevención de Inyección SQL
 
@@ -243,7 +243,7 @@ La política debe establecer que toda interacción con la base de datos debe rea
 
 
 
-## 14. Control de mitigación propuesto
+## 12. Control de mitigación propuesto
 
 ### Control principal
 
@@ -268,7 +268,7 @@ Las consultas parametrizadas separan la instrucción SQL de los datos ingresados
 
 
 
-## 15. Ejemplo de corrección segura
+## 13. Ejemplo de corrección segura
 
 La forma insegura de construir una consulta ocurre cuando se concatena directamente la entrada del usuario:
 
@@ -285,7 +285,7 @@ SELECT * FROM clientes WHERE id = ?
 En este enfoque, el valor ingresado por el usuario se entrega como parámetro y no como parte de la instrucción SQL. Así, aunque el usuario escriba caracteres especiales, la base de datos los interpreta como datos y no como código.
 
 
-## 16. Detección y monitoreo
+## 14. Detección y monitoreo
 
 Además de corregir el código, Inmobiliaria Terranova debe implementar mecanismos de detección y monitoreo.
 
@@ -300,7 +300,7 @@ Además de corregir el código, Inmobiliaria Terranova debe implementar mecanism
 * Respuestas del sistema con errores 500 asociados a consultas.
 
 
-## 17. Actos a seguir posterior a la inyección
+## 15. Actos a seguir posterior a la inyección
 
 Se recomienda aplicar el siguiente plan de remediación:
 
@@ -329,7 +329,7 @@ Se recomienda aplicar el siguiente plan de remediación:
 10. Documentar lecciones aprendidas y reforzar controles preventivos.
 
 
-## 19. Conclusión del hallazgo
+## 16. Conclusión del hallazgo
 
 La Inyección SQL representa un hallazgo de alta severidad para Inmobiliaria Terranova, debido a que afecta directamente la base de datos del portal de clientes. En este sistema se custodian activos críticos, como contratos, datos financieros, credenciales e información personal.
 
@@ -341,7 +341,7 @@ Por su impacto potencial sobre contratos y datos financieros, este hallazgo debe
 
 
 
-## 20. Fuentes de apoyo utilizadas
+## 17. Fuentes de apoyo utilizadas
 
 * OWASP — SQL Injection Prevention Cheat Sheet.
 * OWASP — Web Security Testing Guide: Testing for SQL Injection.

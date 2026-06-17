@@ -146,30 +146,30 @@ Los objetivos específicos de esta auditoría son:
 10. Definir medidas de recuperación ante incidentes y continuidad operacional.
 11. Presentar el informe mediante una aplicación web React desplegada en Vercel.
 
-## 9. Ambiente controlado de pruebas
+## 8. Ambiente controlado de pruebas
 
 Para el desarrollo de la evaluación se utiliza DVWA, una aplicación web diseñada para practicar conceptos de seguridad en un entorno controlado.
 
 DVWA permite simular vulnerabilidades de forma segura y documentar evidencias sin afectar sistemas reales.
 
-## 11. Vulnerabilidades consideradas
+## 9. Vulnerabilidades consideradas
 
 La auditoría contempla tres vulnerabilidades principales.
 
-### 11.1 Inyección SQL
+### 10.1 Inyección SQL
 
 La Inyección SQL ocurre cuando una aplicación permite que datos ingresados por el usuario sean interpretados como parte de una consulta SQL. En el contexto de Inmobiliaria Terranova, esta vulnerabilidad podría comprometer la base de datos del portal de clientes y exponer contratos, datos financieros o credenciales.
 
-### 11.2 XSS reflejado
+### 10.2 XSS reflejado
 
 El XSS reflejado ocurre cuando una aplicación devuelve contenido ingresado por el usuario sin aplicar controles adecuados, permitiendo la ejecución de código en el navegador de la víctima. En el portal de una inmobiliaria, esto podría afectar la confianza del cliente, la sesión del usuario o la integridad visual de la plataforma.
 
-### 11.3 Inyección de comandos
+### 10.3 Inyección de comandos
 
 La Inyección de comandos ocurre cuando una aplicación permite que una entrada del usuario sea enviada al sistema operativo del servidor. Esta vulnerabilidad puede afectar gravemente la disponibilidad, integridad y seguridad del servidor donde opera el portal.
 
 
-## 12. Activos preliminares de información
+## 11. Activos preliminares de información
 
 Antes de desarrollar el análisis detallado de activos en el archivo correspondiente, se identifican de forma preliminar los siguientes activos críticos:
 
