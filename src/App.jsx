@@ -22,6 +22,7 @@ import InyeccionSQL from './components/InyeccionSQL'
 import XSS from './components/XSS'
 import Comandos from './components/Comandos'
 import Activos from './components/Activos'
+import Matriz from './components/Matriz'
 import './App.css'
 
 const secciones = [
@@ -77,7 +78,7 @@ const secciones = [
     subtitulo: 'Probabilidad por impacto',
     estado: 'Pendiente',
     icono: Flame,
-    componente: null,
+    componente: Matriz,
   },
   {
     id: 'controles',
@@ -215,22 +216,22 @@ function App() {
 
             <div className="audit-cover-grid">
               <article>
-                <span>Entidad auditada</span>
+                <span>Entidad auditada: </span>
                 <strong>Inmobiliaria Terranova</strong>
               </article>
 
               <article>
-                <span>Sistema evaluado</span>
+                <span>Sistema evaluado: </span>
                 <strong>Portal de clientes</strong>
               </article>
 
               <article>
-                <span>Datos críticos</span>
+                <span>Datos críticos: </span>
                 <strong>Contratos y datos financieros</strong>
               </article>
 
               <article>
-                <span>Ambiente de prueba</span>
+                <span>Ambiente de prueba: </span>
                 <strong>DVWA controlado</strong>
               </article>
             </div>

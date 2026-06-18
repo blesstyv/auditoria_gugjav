@@ -436,12 +436,12 @@ button {
 
 .audit-document {
   background:
-    radial-gradient(circle at top right, rgba(250, 204, 21, 0.12), transparent 28%),
-    linear-gradient(135deg, var(--purple), var(--purple-dark));
-  border: 1px solid var(--purple-border);
+    radial-gradient(circle at top right, rgba(139, 28, 246, 0.18), transparent 32%),
+    linear-gradient(135deg, #16001f 0%, #2e0249 48%, #4c047a 100%);
+  border: 1px solid rgba(216, 180, 254, 0.45);
   border-radius: 32px;
   padding: 34px;
-  box-shadow: 0 24px 60px rgba(76, 4, 122, 0.18);
+  box-shadow: 0 24px 60px rgba(46, 2, 73, 0.26);
   animation: fadeUp 0.45s ease both;
 }
 
@@ -767,4 +767,136 @@ button {
   .markdown-view ol {
     font-size: 16px;
   }
+}
+
+/* ================================= */
+/* SCROLL INDEPENDIENTE DE AUDITORÍA */
+/* ================================= */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* Contenedor general de la auditoría */
+.audit-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Barra lateral izquierda con scroll propio */
+.audit-sidebar {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: sticky;
+  top: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple) rgba(255, 255, 255, 0.08);
+}
+
+/* Contenido principal con scroll propio */
+.audit-main {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Scroll visual para navegador Chrome, Edge y Opera */
+.audit-sidebar::-webkit-scrollbar,
+.audit-main::-webkit-scrollbar {
+  width: 10px;
+}
+
+.audit-sidebar::-webkit-scrollbar-track,
+.audit-main::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.audit-sidebar::-webkit-scrollbar-thumb,
+.audit-main::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--purple), var(--purple-dark));
+  border-radius: 999px;
+}
+
+.audit-sidebar::-webkit-scrollbar-thumb:hover,
+.audit-main::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--yellow), var(--purple));
+}
+
+/* En pantallas pequeñas vuelve al scroll normal */
+@media (max-width: 1100px) {
+  body {
+    overflow: auto;
+  }
+
+  .audit-page {
+    height: auto;
+    overflow: visible;
+  }
+
+  .audit-sidebar {
+    height: auto;
+    overflow: visible;
+    position: relative;
+  }
+
+  .audit-main {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+/* ================================= */
+/* CORRECCIÓN PORTADA SUPERIOR */
+/* ================================= */
+
+.audit-cover {
+  min-height: 500px;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.audit-cover-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+}
+
+.audit-cover-stamp {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+}
+
+.audit-cover h2 {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  color: white;
+}
+
+.audit-cover p {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.audit-cover-grid {
+  display: grid;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Ajuste para que el scroll independiente no corte la portada */
+.audit-main {
+  padding-top: 34px;
+  scroll-padding-top: 34px;
 }

@@ -2,26 +2,13 @@
 
 ## Inmobiliaria Terranova — Portal de clientes
 
-## 1. Identificación general
-
-**Empresa auditada:** Inmobiliaria Terranova
-**Rubro:** Inmobiliaria
-**Sistema evaluado:** Portal de clientes
-**Tipo de evaluación:** Auditoría de seguridad web en ambiente controlado
-**Asignatura:** TI3034 — Fundamentos de Seguridad de la Información
-**Unidad:** Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo
-**Estudiante:** Javier Guglielmini
-**Sufijo del proyecto:** gugjav
-**Carpeta del informe:** docs_gugjav
-
-
-## 2. Contexto de la empresa
+## 1. Contexto de la empresa
 
 Inmobiliaria Terranova es una empresa perteneciente al rubro inmobiliario. Su actividad principal se relaciona con la gestión de propiedades, atención de clientes, administración de contratos y seguimiento de procesos asociados a compra, venta, arriendo o financiamiento inmobiliario.
 
 Dentro de su operación digital, la empresa cuenta con un portal de clientes que permite centralizar información relevante para sus usuarios. Este portal es considerado un sistema crítico, debido a que puede almacenar, consultar o gestionar información contractual, financiera y personal de los clientes.
 
-## 3. Portal de clientes auditado
+## 2. Portal de clientes auditado
 
 El portal de clientes de Inmobiliaria Terranova se considera una plataforma web utilizada para que los clientes puedan interactuar con la empresa y consultar información relacionada con sus procesos inmobiliarios.
 
@@ -38,11 +25,11 @@ Entre sus posibles funcionalidades se consideran:
 Desde la perspectiva de seguridad de la información, este portal requiere altos niveles de protección, ya que una vulnerabilidad web podría afectar directamente la confidencialidad, integridad y disponibilidad de los datos administrados por la empresa.
 
 
-## 4. Datos que custodia Inmobiliaria Terranova
+## 3. Datos que custodia Inmobiliaria Terranova
 
 La empresa custodia información relevante para sus clientes y para la continuidad de su operación. Los datos más importantes identificados para esta auditoría son los siguientes:
 
-### 4.1 Contratos
+### 3.1 Contratos
 
 Corresponden a documentos asociados a operaciones inmobiliarias, tales como:
 
@@ -54,7 +41,7 @@ Corresponden a documentos asociados a operaciones inmobiliarias, tales como:
 
 Estos documentos son críticos porque contienen obligaciones legales, condiciones económicas, datos de las partes involucradas y antecedentes del inmueble.
 
-### 4.2 Datos financieros de clientes
+### 3.2 Datos financieros de clientes
 
 Incluyen información vinculada a la situación económica o capacidad de pago de los clientes, por ejemplo:
 
@@ -67,7 +54,7 @@ Incluyen información vinculada a la situación económica o capacidad de pago d
 
 Estos datos tienen alta sensibilidad para el negocio, ya que una exposición no autorizada podría generar daño económico, reputacional y legal.
 
-### 4.3 Datos personales
+### 3.3 Datos personales
 
 El portal también puede tratar datos personales necesarios para identificar y gestionar la relación con los clientes, tales como:
 
@@ -81,7 +68,7 @@ El portal también puede tratar datos personales necesarios para identificar y g
 
 La protección de estos datos es relevante porque permite resguardar la privacidad de los clientes y mantener la confianza en la empresa.
 
-### 4.4 Credenciales de acceso
+### 3.4 Credenciales de acceso
 
 El portal puede almacenar o procesar credenciales de autenticación, tales como:
 
@@ -92,7 +79,7 @@ El portal puede almacenar o procesar credenciales de autenticación, tales como:
 
 La exposición de credenciales podría permitir accesos no autorizados al portal y comprometer información contractual o financiera.
 
-### 4.5 Información interna del sistema
+### 3.5 Información interna del sistema
 
 También se consideran activos técnicos del portal, tales como:
 
@@ -107,7 +94,7 @@ También se consideran activos técnicos del portal, tales como:
 Estos activos son importantes porque una vulnerabilidad técnica podría permitir que un atacante afecte la operación completa del portal.
 
 
-## 5. Importancia de la seguridad para la empresa
+## 4. Importancia de la seguridad para la empresa
 
 La seguridad del portal de clientes es fundamental para Inmobiliaria Terranova, porque la información que administra tiene valor legal, financiero y comercial.
 
@@ -125,12 +112,12 @@ Una falla de seguridad podría generar consecuencias como:
 Por esta razón, una vulnerabilidad web no debe analizarse solo como un problema técnico. En este caso, debe entenderse como un riesgo de negocio que puede afectar la continuidad operacional, la relación con los clientes y la confianza en los procesos inmobiliarios digitales.
 
 
-## 6. Objetivo general de la auditoría
+## 5. Objetivo general de la auditoría
 
 Evaluar vulnerabilidades de seguridad web en un ambiente controlado, simulando el análisis del portal de clientes de Inmobiliaria Terranova, con el propósito de identificar riesgos técnicos y de negocio, medir su gravedad, priorizar los hallazgos y proponer medidas de prevención, mitigación y recuperación.
 
 
-## 7. Objetivos específicos
+## 6. Objetivos específicos
 
 Los objetivos específicos de esta auditoría son:
 
@@ -146,30 +133,30 @@ Los objetivos específicos de esta auditoría son:
 10. Definir medidas de recuperación ante incidentes y continuidad operacional.
 11. Presentar el informe mediante una aplicación web React desplegada en Vercel.
 
-## 8. Ambiente controlado de pruebas
+## 7. Ambiente controlado de pruebas
 
 Para el desarrollo de la evaluación se utiliza DVWA, una aplicación web diseñada para practicar conceptos de seguridad en un entorno controlado.
 
 DVWA permite simular vulnerabilidades de forma segura y documentar evidencias sin afectar sistemas reales.
 
-## 9. Vulnerabilidades consideradas
+## 8. Vulnerabilidades consideradas
 
 La auditoría contempla tres vulnerabilidades principales.
 
-### 10.1 Inyección SQL
+### 8.1 Inyección SQL
 
 La Inyección SQL ocurre cuando una aplicación permite que datos ingresados por el usuario sean interpretados como parte de una consulta SQL. En el contexto de Inmobiliaria Terranova, esta vulnerabilidad podría comprometer la base de datos del portal de clientes y exponer contratos, datos financieros o credenciales.
 
-### 10.2 XSS reflejado
+### 8.2 XSS reflejado
 
 El XSS reflejado ocurre cuando una aplicación devuelve contenido ingresado por el usuario sin aplicar controles adecuados, permitiendo la ejecución de código en el navegador de la víctima. En el portal de una inmobiliaria, esto podría afectar la confianza del cliente, la sesión del usuario o la integridad visual de la plataforma.
 
-### 10.3 Inyección de comandos
+### 8.3 Inyección de comandos
 
 La Inyección de comandos ocurre cuando una aplicación permite que una entrada del usuario sea enviada al sistema operativo del servidor. Esta vulnerabilidad puede afectar gravemente la disponibilidad, integridad y seguridad del servidor donde opera el portal.
 
 
-## 11. Activos preliminares de información
+## 9. Activos preliminares de información
 
 Antes de desarrollar el análisis detallado de activos en el archivo correspondiente, se identifican de forma preliminar los siguientes activos críticos:
 
