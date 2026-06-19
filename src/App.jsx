@@ -15,17 +15,22 @@ import {
   Landmark,
   FileText,
   Boxes,
+  ExternalLink,
 } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 
-import Resumen from './components/Resumen'
-import InyeccionSQL from './components/InyeccionSQL'
-import XSS from './components/XSS'
-import Comandos from './components/Comandos'
-import Activos from './components/Activos'
-import Matriz from './components/Matriz'
-import Controles from './components/Controles'
-import Recuperacion from './components/Recuperacion'
-import Prompts from './components/Prompts'
+import MarkdownView from './components/MarkdownView'
+
+import resumenMd from '../docs_gugjav/01_resumen_gugjav.md?raw'
+import sqliMd from '../docs_gugjav/02_sqli_gugjav.md?raw'
+import xssMd from '../docs_gugjav/03_xss_gugjav.md?raw'
+import comandosMd from '../docs_gugjav/04_comandos_gugjav.md?raw'
+import activosMd from '../docs_gugjav/05_activos_gugjav.md?raw'
+import matrizMd from '../docs_gugjav/06_matriz_gugjav.md?raw'
+import controlesMd from '../docs_gugjav/07_controles_gugjav.md?raw'
+import recuperacionMd from '../docs_gugjav/08_recuperacion_gugjav.md?raw'
+import promptsMd from '../docs_gugjav/09_prompts_gugjav.md?raw'
+
 import './App.css'
 
 const secciones = [
@@ -35,7 +40,7 @@ const secciones = [
     titulo: 'Resumen ejecutivo',
     subtitulo: 'Contexto general de la auditoría',
     icono: Building2,
-    componente: Resumen,
+    markdown: resumenMd,
   },
   {
     id: 'sqli',
@@ -43,7 +48,7 @@ const secciones = [
     titulo: 'Inyección SQL',
     subtitulo: 'Riesgo sobre base de datos',
     icono: Database,
-    componente: InyeccionSQL,
+    markdown: sqliMd,
   },
   {
     id: 'xss',
@@ -51,7 +56,7 @@ const secciones = [
     titulo: 'XSS reflejado',
     subtitulo: 'Riesgo sobre sesión y navegador',
     icono: Code2,
-    componente: XSS,
+    markdown: xssMd,
   },
   {
     id: 'comandos',
@@ -59,7 +64,7 @@ const secciones = [
     titulo: 'Inyección de comandos',
     subtitulo: 'Riesgo sobre servidor',
     icono: Server,
-    componente: Comandos,
+    markdown: comandosMd,
   },
   {
     id: 'activos',
@@ -67,7 +72,7 @@ const secciones = [
     titulo: 'Activos de información',
     subtitulo: 'Contratos, datos y sistemas',
     icono: FileKey2,
-    componente: Activos,
+    markdown: activosMd,
   },
   {
     id: 'matriz',
@@ -75,7 +80,7 @@ const secciones = [
     titulo: 'Matriz de riesgo',
     subtitulo: 'Probabilidad e impacto',
     icono: Flame,
-    componente: Matriz,
+    markdown: matrizMd,
   },
   {
     id: 'controles',
@@ -83,7 +88,7 @@ const secciones = [
     titulo: 'Controles',
     subtitulo: 'Defensa por capas',
     icono: LockKeyhole,
-    componente: Controles,
+    markdown: controlesMd,
   },
   {
     id: 'recuperacion',
@@ -91,7 +96,7 @@ const secciones = [
     titulo: 'Recuperación',
     subtitulo: 'Respuesta ante incidentes',
     icono: RotateCcw,
-    componente: Recuperacion,
+    markdown: recuperacionMd,
   },
   {
     id: 'prompts',
@@ -99,7 +104,7 @@ const secciones = [
     titulo: 'Bitácora IA',
     subtitulo: 'Uso crítico de IA como agente',
     icono: Bot,
-    componente: Prompts,
+    markdown: promptsMd,
   },
 ]
 
@@ -107,7 +112,6 @@ function App() {
   const [seccionActiva, setSeccionActiva] = useState(secciones[0])
   const documentRef = useRef(null)
 
-  const ComponenteActivo = seccionActiva.componente
   const IconoActivo = seccionActiva.icono
 
   function cambiarSeccion(seccion) {
@@ -130,12 +134,12 @@ function App() {
           </div>
 
           <div>
-            <h1>Inmobiliaria Terranova</h1>
+            <h1>Terranova Audit</h1>
             <p>Auditoría de seguridad web</p>
           </div>
         </section>
 
-        <nav className="mc-topnav" aria-label="Navegación de capítulos">
+        <nav className="mc-topnav" aria-label="Navegación rápida de capítulos">
           {secciones.map((seccion) => (
             <button
               key={seccion.id}
@@ -146,14 +150,13 @@ function App() {
                   : 'mc-topnav-item'
               }
               onClick={() => cambiarSeccion(seccion)}
+              title={`${seccion.numero}. ${seccion.titulo}`}
             >
               {seccion.numero}
             </button>
           ))}
         </nav>
       </header>
-
-        
 
       <section className="mc-hero">
         <div className="mc-hero-text">
@@ -197,11 +200,12 @@ function App() {
       <section className="mc-index-section">
         <div className="mc-index-heading">
           <span>Índice de la auditoría</span>
+
           <h2>Puntos tratados en el informe</h2>
+
           <p>
-            Selecciona un capítulo para revisar el análisis correspondiente de
-            la auditoría realizada al portal de clientes de Inmobiliaria
-            Terranova.
+            Selecciona un capítulo para revisar el análisis correspondiente de la
+            auditoría realizada al portal de clientes de Inmobiliaria Terranova.
           </p>
         </div>
 
@@ -325,8 +329,41 @@ function App() {
       </section>
 
       <section key={seccionActiva.id} className="mc-document">
-        <ComponenteActivo />
+        <MarkdownView markdown={seccionActiva.markdown} />
       </section>
+
+      <footer className="mc-footer">
+        <div className="mc-footer-content">
+          <div className="mc-footer-blocks">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div className="mc-footer-text">
+            <span>Repositorio del proyecto</span>
+
+            <h3>Auditoría Web — Inmobiliaria Terranova</h3>
+
+            <p>
+              Acceso al repositorio utilizado para respaldar el desarrollo del
+              informe, los archivos Markdown y la aplicación React.
+            </p>
+          </div>
+
+          <a
+            className="mc-footer-link"
+            href="https://github.com/blesstyv/auditoria_gugjav"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Abrir repositorio de GitHub"
+          >
+            <FaGithub size={24} />
+            <strong>Abrir GitHub</strong>
+            <ExternalLink size={18} />
+          </a>
+        </div>
+      </footer>
     </main>
   )
 }
