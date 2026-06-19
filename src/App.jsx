@@ -10,11 +10,12 @@ import {
   LockKeyhole,
   RotateCcw,
   Bot,
-  Clock3,
   ShieldCheck,
   FileSearch,
   ClipboardList,
   CheckCircle2,
+  FileText,
+  Landmark,
 } from 'lucide-react'
 
 import Resumen from './components/Resumen'
@@ -23,6 +24,9 @@ import XSS from './components/XSS'
 import Comandos from './components/Comandos'
 import Activos from './components/Activos'
 import Matriz from './components/Matriz'
+import Controles from './components/Controles'
+import Recuperacion from './components/Recuperacion'
+import Prompts from './components/Prompts'
 import './App.css'
 
 const secciones = [
@@ -30,8 +34,7 @@ const secciones = [
     id: 'resumen',
     numero: '01',
     titulo: 'Resumen ejecutivo',
-    subtitulo: 'Presentación de Inmobiliaria Terranova',
-    estado: 'Completado',
+    subtitulo: 'Presentación general de la auditoría',
     icono: Building2,
     componente: Resumen,
   },
@@ -39,8 +42,7 @@ const secciones = [
     id: 'sqli',
     numero: '02',
     titulo: 'Inyección SQL',
-    subtitulo: 'Evidencia, CVSS, prevención y mitigación',
-    estado: 'Completado',
+    subtitulo: 'Hallazgo sobre base de datos y registros críticos',
     icono: Database,
     componente: InyeccionSQL,
   },
@@ -48,8 +50,7 @@ const secciones = [
     id: 'xss',
     numero: '03',
     titulo: 'XSS reflejado',
-    subtitulo: 'Ejecución de código en navegador',
-    estado: 'Completado',
+    subtitulo: 'Hallazgo sobre sesión, navegador y confianza del cliente',
     icono: Code2,
     componente: XSS,
   },
@@ -57,8 +58,7 @@ const secciones = [
     id: 'comandos',
     numero: '04',
     titulo: 'Inyección de comandos',
-    subtitulo: 'Ejecución de comandos en servidor',
-    estado: 'Completado',
+    subtitulo: 'Hallazgo sobre servidor e infraestructura',
     icono: Server,
     componente: Comandos,
   },
@@ -66,8 +66,7 @@ const secciones = [
     id: 'activos',
     numero: '05',
     titulo: 'Activos de información',
-    subtitulo: 'Riesgos de la industria inmobiliaria',
-    estado: 'Completado',
+    subtitulo: 'Inventario y criticidad de activos del portal',
     icono: FileKey2,
     componente: Activos,
   },
@@ -75,8 +74,7 @@ const secciones = [
     id: 'matriz',
     numero: '06',
     titulo: 'Matriz de riesgo',
-    subtitulo: 'Probabilidad por impacto',
-    estado: 'Pendiente',
+    subtitulo: 'Probabilidad, impacto y priorización',
     icono: Flame,
     componente: Matriz,
   },
@@ -84,55 +82,33 @@ const secciones = [
     id: 'controles',
     numero: '07',
     titulo: 'Controles de seguridad',
-    subtitulo: 'Prevención y mitigación',
-    estado: 'Pendiente',
+    subtitulo: 'Prevención, mitigación y defensa por capas',
     icono: LockKeyhole,
-    componente: null,
+    componente: Controles,
   },
   {
     id: 'recuperacion',
     numero: '08',
     titulo: 'Recuperación',
-    subtitulo: 'Plan post incidente',
-    estado: 'Pendiente',
+    subtitulo: 'Respuesta ante incidentes y continuidad operacional',
     icono: RotateCcw,
-    componente: null,
+    componente: Recuperacion,
   },
   {
     id: 'prompts',
     numero: '09',
-    titulo: 'Bitácora IA',
-    subtitulo: 'Uso crítico de inteligencia artificial',
-    estado: 'Pendiente',
+    titulo: 'Bitácora de IA',
+    subtitulo: 'Uso crítico de inteligencia artificial como agente de apoyo',
     icono: Bot,
-    componente: null,
+    componente: Prompts,
   },
 ]
-
-function SeccionPendiente({ titulo, subtitulo }) {
-  return (
-    <section className="audit-pending">
-      <Clock3 size={44} />
-      <span>Sección pendiente</span>
-      <h2>{titulo}</h2>
-      <p>{subtitulo}</p>
-      <p>
-        Esta sección está contemplada dentro del informe formal de auditoría y se
-        integrará cuando el archivo Markdown correspondiente sea completado.
-      </p>
-    </section>
-  )
-}
 
 function App() {
   const [seccionActiva, setSeccionActiva] = useState(secciones[0])
 
   const ComponenteActivo = seccionActiva.componente
   const IconoActivo = seccionActiva.icono
-
-  const total = secciones.length
-  const completadas = secciones.filter((seccion) => seccion.estado === 'Completado').length
-  const avance = Math.round((completadas / total) * 100)
 
   function cambiarSeccion(seccion) {
     setSeccionActiva(seccion)
@@ -142,37 +118,46 @@ function App() {
   return (
     <main className="audit-page">
       <aside className="audit-sidebar">
-        <div className="audit-logo">
-          <ShieldAlert size={34} />
+        <section className="audit-logo">
+          <div className="audit-logo-icon">
+            <ShieldAlert size={34} />
+          </div>
 
           <div>
             <h1>Auditoría Web</h1>
-            <p>Informe técnico</p>
+            <p>Informe técnico de seguridad</p>
           </div>
-        </div>
+        </section>
 
         <section className="audit-client-card">
           <span>Empresa auditada</span>
           <strong>Inmobiliaria Terranova</strong>
-          <p>Portal de clientes con custodia de contratos y datos financieros.</p>
-        </section>
-
-        <section className="audit-progress">
-          <div className="audit-progress-top">
-            <span>Avance del informe</span>
-            <strong>{avance}%</strong>
-          </div>
-
-          <div className="audit-progress-bar">
-            <div style={{ width: `${avance}%` }} />
-          </div>
-
           <p>
-            {completadas} de {total} capítulos integrados.
+            Evaluación de seguridad web aplicada al portal de clientes que
+            custodia contratos y datos financieros.
           </p>
         </section>
 
-        <nav className="audit-menu">
+        <section className="audit-scope-card">
+          <span>Alcance del informe</span>
+
+          <div className="scope-item">
+            <FileText size={18} />
+            <p>9 capítulos técnicos documentados.</p>
+          </div>
+
+          <div className="scope-item">
+            <Landmark size={18} />
+            <p>Enfoque en riesgo para el rubro inmobiliario.</p>
+          </div>
+
+          <div className="scope-item">
+            <ShieldCheck size={18} />
+            <p>Pruebas realizadas en ambiente controlado DVWA.</p>
+          </div>
+        </section>
+
+        <nav className="audit-menu" aria-label="Navegación del informe">
           {secciones.map((seccion) => {
             const Icono = seccion.icono
 
@@ -188,11 +173,12 @@ function App() {
                 onClick={() => cambiarSeccion(seccion)}
               >
                 <span className="audit-menu-number">{seccion.numero}</span>
+
                 <Icono size={19} />
 
                 <div>
                   <strong>{seccion.titulo}</strong>
-                  <small>{seccion.estado}</small>
+                  <small>{seccion.subtitulo}</small>
                 </div>
               </button>
             )
@@ -209,29 +195,29 @@ function App() {
 
             <p>
               Evaluación técnica del portal de clientes de Inmobiliaria
-              Terranova, orientada a la identificación de vulnerabilidades,
-              análisis de evidencia, medición de severidad, activos críticos y
-              riesgos asociados al negocio inmobiliario.
+              Terranova, orientada a identificar vulnerabilidades, analizar
+              evidencia, medir severidad, priorizar riesgos y proponer controles
+              de seguridad aplicables al negocio inmobiliario.
             </p>
 
             <div className="audit-cover-grid">
               <article>
-                <span>Entidad auditada: </span>
+                <span>Entidad auditada</span>
                 <strong>Inmobiliaria Terranova</strong>
               </article>
 
               <article>
-                <span>Sistema evaluado: </span>
+                <span>Sistema evaluado</span>
                 <strong>Portal de clientes</strong>
               </article>
 
               <article>
-                <span>Datos críticos: </span>
+                <span>Datos críticos</span>
                 <strong>Contratos y datos financieros</strong>
               </article>
 
               <article>
-                <span>Ambiente de prueba: </span>
+                <span>Ambiente de prueba</span>
                 <strong>DVWA controlado</strong>
               </article>
             </div>
@@ -239,9 +225,14 @@ function App() {
 
           <aside className="audit-cover-stamp">
             <ShieldCheck size={52} />
+
             <span>Documento técnico</span>
+
             <strong>Auditoría formal</strong>
-            <p>Uso académico, ético y defensivo.</p>
+
+            <p>
+              Informe desarrollado con enfoque académico, ético y defensivo.
+            </p>
           </aside>
         </header>
 
@@ -278,14 +269,7 @@ function App() {
         </section>
 
         <section key={seccionActiva.id} className="audit-document">
-          {ComponenteActivo ? (
-            <ComponenteActivo />
-          ) : (
-            <SeccionPendiente
-              titulo={seccionActiva.titulo}
-              subtitulo={seccionActiva.subtitulo}
-            />
-          )}
+          <ComponenteActivo />
         </section>
       </section>
     </main>
