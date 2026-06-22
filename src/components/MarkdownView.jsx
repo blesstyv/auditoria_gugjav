@@ -263,10 +263,21 @@ function MarkdownView({ markdown }) {
   return (
     <div className="markdown-view">
       {blocks.map((block, index) => {
-        if (block.type === 'h1') return <h1 key={index}>{renderInline(block.content)}</h1>
-        if (block.type === 'h2') return <h2 key={index}>{renderInline(block.content)}</h2>
-        if (block.type === 'h3') return <h3 key={index}>{renderInline(block.content)}</h3>
-        if (block.type === 'p') return <p key={index}>{renderInline(block.content)}</p>
+        if (block.type === 'h1') {
+          return <h1 key={index}>{renderInline(block.content)}</h1>
+        }
+
+        if (block.type === 'h2') {
+          return <h2 key={index}>{renderInline(block.content)}</h2>
+        }
+
+        if (block.type === 'h3') {
+          return <h3 key={index}>{renderInline(block.content)}</h3>
+        }
+
+        if (block.type === 'p') {
+          return <p key={index}>{renderInline(block.content)}</p>
+        }
 
         if (block.type === 'ul') {
           return (
