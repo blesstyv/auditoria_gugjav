@@ -1,30 +1,29 @@
 import { useRef, useState } from 'react'
+
 import {
-  Building2,
-  Database,
-  Code2,
-  Server,
-  FileKey2,
-  Flame,
-  LockKeyhole,
-  RotateCcw,
-  Bot,
-  ShieldCheck,
-  FileSearch,
-  ClipboardList,
-  Landmark,
-  FileText,
-  Boxes,
-  ExternalLink,
-  AlertTriangle,
-  Target,
-  CheckCircle2,
-  Eye,
-  Wrench,
-  BookOpen,
-  ShieldAlert,
-} from 'lucide-react'
-import { FaGithub } from 'react-icons/fa'
+  FaBuilding,
+  FaDatabase,
+  FaCode,
+  FaServer,
+  FaFolderOpen,
+  FaFire,
+  FaLock,
+  FaSyncAlt,
+  FaRobot,
+  FaShieldAlt,
+  FaSearch,
+  FaClipboardList,
+  FaUniversity,
+  FaFileAlt,
+  FaCubes,
+  FaExclamationTriangle,
+  FaBullseye,
+  FaCheckCircle,
+  FaEye,
+  FaTools,
+  FaBookOpen,
+  FaGithub,
+} from 'react-icons/fa'
 
 import MarkdownView from './components/MarkdownView'
 
@@ -48,12 +47,12 @@ const secciones = [
     subtitulo: 'Contexto general de la auditoría',
     tipo: 'gestion',
     nivel: 'Base',
-    icono: Building2,
+    icono: FaBuilding,
     markdown: resumenMd,
     enfoque:
       'Presenta el objetivo, alcance y contexto general de la auditoría aplicada al portal de clientes de Inmobiliaria Terranova.',
     lectura:
-      'Se presenta la entrada ejecutiva del informe. Explica por qué se evalúa el portal, qué sistema se revisa, qué datos son críticos y bajo qué condiciones se realiza la auditoría. Es importante porque permite comprender que el análisis no se limita a pruebas técnicas, sino que responde a la necesidad de proteger información sensible del negocio inmobiliario.',
+      'Este apartado funciona como entrada ejecutiva del informe. Explica por qué se evalúa el portal, qué sistema se revisa, qué datos son críticos y bajo qué condiciones se realiza la auditoría. Permite comprender que el análisis no se limita a pruebas técnicas, sino a la protección de información sensible del negocio inmobiliario.',
     impacto:
       'Permite orientar la auditoría hacia la protección de contratos, datos financieros, credenciales y confianza de los clientes.',
     decision:
@@ -73,7 +72,7 @@ const secciones = [
     subtitulo: 'Riesgo sobre base de datos',
     tipo: 'hallazgo',
     nivel: 'Crítico',
-    icono: Database,
+    icono: FaDatabase,
     markdown: sqliMd,
     evidencia: '/img_gugjav/sqli_gugjav.png',
     cvss: {
@@ -87,7 +86,7 @@ const secciones = [
     enfoque:
       'Analiza cómo una entrada manipulada puede alterar consultas SQL y exponer información almacenada en la base de datos.',
     lectura:
-      'Este hallazgo es uno de los más relevantes porque apunta directamente al núcleo de información del portal. En una inmobiliaria, la base de datos puede contener contratos, estados de pago, datos financieros, credenciales y registros personales de clientes. Por eso, aunque la prueba se realiza en DVWA, el riesgo se interpreta desde el impacto que tendría sobre Inmobiliaria Terranova.',
+      'Este hallazgo es uno de los más relevantes porque apunta directamente al núcleo de información del portal. En una inmobiliaria, la base de datos puede contener contratos, estados de pago, datos financieros, credenciales y registros personales de clientes.',
     impacto:
       'Puede permitir exposición, modificación o extracción de contratos, datos financieros, credenciales y registros de clientes.',
     decision:
@@ -108,7 +107,7 @@ const secciones = [
     subtitulo: 'Riesgo sobre sesión y navegador',
     tipo: 'hallazgo',
     nivel: 'Alto',
-    icono: Code2,
+    icono: FaCode,
     markdown: xssMd,
     evidencia: '/img_gugjav/xss_gugjav.png',
     cvss: {
@@ -122,7 +121,7 @@ const secciones = [
     enfoque:
       'Evalúa el riesgo de ejecutar código en el navegador cuando la aplicación refleja entradas del usuario sin tratamiento seguro.',
     lectura:
-      'Este apartado se centra en la relación entre el portal y sus usuarios. Aunque XSS no afecta directamente la base de datos como SQL Injection, puede comprometer la sesión del cliente, alterar mensajes visibles, generar engaños y afectar la confianza en el portal. En un portal inmobiliario, la confianza visual y funcional es clave porque los clientes pueden revisar documentos, pagos o información contractual.',
+      'Este apartado se centra en la relación entre el portal y sus usuarios. Aunque XSS no afecta directamente la base de datos como SQL Injection, puede comprometer la sesión del cliente, alterar mensajes visibles, generar engaños y afectar la confianza en el portal.',
     impacto:
       'Puede afectar sesiones, confianza del cliente, integridad visual del portal y seguridad de la interacción del usuario.',
     decision:
@@ -143,7 +142,7 @@ const secciones = [
     subtitulo: 'Riesgo sobre servidor',
     tipo: 'hallazgo',
     nivel: 'Crítico',
-    icono: Server,
+    icono: FaServer,
     markdown: comandosMd,
     evidencia: '/img_gugjav/comandos_gugjav.png',
     cvss: {
@@ -157,7 +156,7 @@ const secciones = [
     enfoque:
       'Analiza el riesgo de que entradas del usuario sean interpretadas como comandos del sistema operativo.',
     lectura:
-      'Este hallazgo se enfoca en la infraestructura que sostiene el portal. A diferencia de XSS, que ocurre en el navegador, la Inyección de comandos puede afectar directamente el servidor, sus archivos, configuraciones, credenciales y disponibilidad. En el caso de Inmobiliaria Terranova, este riesgo puede comprometer la continuidad operacional del portal de clientes.',
+      'Este hallazgo se enfoca en la infraestructura que sostiene el portal. A diferencia de XSS, que ocurre en el navegador, la Inyección de comandos puede afectar directamente el servidor, sus archivos, configuraciones, credenciales y disponibilidad.',
     impacto:
       'Puede comprometer servidor web, archivos internos, configuraciones, credenciales, disponibilidad del portal y continuidad operacional.',
     decision:
@@ -178,12 +177,12 @@ const secciones = [
     subtitulo: 'Contratos, datos y sistemas',
     tipo: 'gestion',
     nivel: 'Alto',
-    icono: FileKey2,
+    icono: FaFolderOpen,
     markdown: activosMd,
     enfoque:
       'Identifica los activos de información que deben protegerse dentro del portal de clientes.',
     lectura:
-      'Este capítulo permite entender qué elementos tienen valor para la empresa. No todos los activos tienen el mismo nivel de criticidad: los contratos y datos financieros requieren mayor protección que otros elementos secundarios. La sección ayuda a relacionar cada vulnerabilidad con un activo concreto, evitando que la auditoría quede como un análisis técnico aislado.',
+      'Este capítulo permite entender qué elementos tienen valor para la empresa. Los contratos y datos financieros requieren mayor protección que otros elementos secundarios. La sección relaciona cada vulnerabilidad con un activo concreto.',
     impacto:
       'Permite priorizar la protección de contratos, datos financieros, credenciales, respaldos, registros de actividad y servicios críticos.',
     decision:
@@ -203,12 +202,12 @@ const secciones = [
     subtitulo: 'Probabilidad e impacto',
     tipo: 'gestion',
     nivel: 'Crítico',
-    icono: Flame,
+    icono: FaFire,
     markdown: matrizMd,
     enfoque:
       'Consolida los hallazgos y los ordena según probabilidad, impacto y prioridad de tratamiento.',
     lectura:
-      'La matriz transforma los hallazgos técnicos en decisiones de gestión. Su función es responder qué vulnerabilidad debe corregirse primero, por qué se considera más urgente y qué efecto tendría sobre los activos críticos. En esta auditoría, SQL Injection e Inyección de comandos se ubican como riesgos críticos por su impacto sobre base de datos, servidor y continuidad operacional.',
+      'La matriz transforma los hallazgos técnicos en decisiones de gestión. Su función es responder qué vulnerabilidad debe corregirse primero, por qué se considera más urgente y qué efecto tendría sobre los activos críticos.',
     impacto:
       'Permite priorizar acciones de remediación y justificar técnicamente las decisiones de seguridad.',
     decision:
@@ -228,12 +227,12 @@ const secciones = [
     subtitulo: 'Defensa por capas',
     tipo: 'gestion',
     nivel: 'Prioritario',
-    icono: LockKeyhole,
+    icono: FaLock,
     markdown: controlesMd,
     enfoque:
       'Propone controles preventivos, detectivos y de respuesta para reducir los riesgos identificados.',
     lectura:
-      'Este apartado convierte el diagnóstico en acciones concretas. La auditoría no queda solo en indicar fallas, sino que propone medidas técnicas y organizacionales para proteger el portal. Los controles se organizan por vulnerabilidad y también de forma transversal: validación, mínimo privilegio, monitoreo, desarrollo seguro y protección de datos.',
+      'Este apartado convierte el diagnóstico en acciones concretas. La auditoría no queda solo en indicar fallas, sino que propone medidas técnicas y organizacionales para proteger el portal.',
     impacto:
       'Reduce la probabilidad de explotación y mejora la capacidad de detección y respuesta ante incidentes.',
     decision:
@@ -253,12 +252,12 @@ const secciones = [
     subtitulo: 'Respuesta ante incidentes',
     tipo: 'gestion',
     nivel: 'Prioritario',
-    icono: RotateCcw,
+    icono: FaSyncAlt,
     markdown: recuperacionMd,
     enfoque:
       'Define cómo actuar después de un incidente para contener, erradicar y recuperar el portal de forma segura.',
     lectura:
-      'Este capítulo evita que la auditoría se limite a prevención. También establece qué hacer si un incidente ocurre: preservar evidencia, contener el punto vulnerable, revisar accesos, validar respaldos y restaurar operación de forma controlada. Esto es clave para una empresa que custodia contratos y datos financieros.',
+      'Este capítulo establece qué hacer si un incidente ocurre: preservar evidencia, contener el punto vulnerable, revisar accesos, validar respaldos y restaurar operación de forma controlada.',
     impacto:
       'Mejora la continuidad operacional, protege evidencia y reduce el riesgo de restaurar sistemas comprometidos.',
     decision:
@@ -278,12 +277,12 @@ const secciones = [
     subtitulo: 'Uso crítico de IA como agente',
     tipo: 'cierre',
     nivel: 'Evidencia',
-    icono: Bot,
+    icono: FaRobot,
     markdown: promptsMd,
     enfoque:
       'Evidencia cómo se utilizó inteligencia artificial como apoyo técnico y metodológico durante el desarrollo.',
     lectura:
-      'Este apartado demuestra que la IA no fue utilizada para reemplazar el análisis del estudiante, sino como agente de apoyo. Los prompts muestran contexto, decisiones técnicas, revisión de rúbrica, ajustes de estructura y validación del contenido. Esto fortalece la trazabilidad del proceso de trabajo.',
+      'Este apartado demuestra que la IA no fue utilizada para reemplazar el análisis del estudiante, sino como agente de apoyo. Los prompts muestran contexto, decisiones técnicas, revisión de rúbrica, ajustes de estructura y validación del contenido.',
     impacto:
       'Permite demostrar criterio, iteración, revisión y uso responsable de herramientas de IA.',
     decision:
@@ -348,7 +347,7 @@ function App() {
       <header className="mc-topbar">
         <section className="mc-brand">
           <div className="mc-brand-block">
-            <Boxes size={30} />
+            <FaCubes size={30} />
           </div>
 
           <div>
@@ -374,6 +373,19 @@ function App() {
             </button>
           ))}
         </nav>
+
+        <div className="mc-quick-actions">
+          <a
+            className="mc-mini-action"
+            href="https://github.com/blesstyv/auditoria_gugjav"
+            target="_blank"
+            rel="noreferrer"
+            title="Abrir repositorio en GitHub"
+          >
+            <FaGithub size={18} />
+            <span>GitHub</span>
+          </a>
+        </div>
       </header>
 
       <section className="mc-hero">
@@ -402,7 +414,7 @@ function App() {
         </div>
 
         <aside className="mc-hero-panel">
-          <ShieldCheck size={54} />
+          <FaShieldAlt size={54} />
 
           <span>Panel ejecutivo</span>
 
@@ -417,21 +429,21 @@ function App() {
 
       <section className="audit-dashboard">
         <article>
-          <ShieldAlert size={32} />
+          <FaExclamationTriangle size={32} />
           <span>Hallazgos críticos</span>
           <strong>{hallazgosCriticos}</strong>
           <p>SQL Injection e Inyección de comandos requieren corrección prioritaria.</p>
         </article>
 
         <article>
-          <Target size={32} />
+          <FaBullseye size={32} />
           <span>Activo principal</span>
           <strong>Portal de clientes</strong>
           <p>Concentra contratos, datos financieros y acceso de usuarios.</p>
         </article>
 
         <article>
-          <CheckCircle2 size={32} />
+          <FaCheckCircle size={32} />
           <span>Resultado esperado</span>
           <strong>Reducir riesgo</strong>
           <p>Aplicar controles, recuperación y seguimiento documentado.</p>
@@ -500,25 +512,25 @@ function App() {
 
       <section className="mc-info-strip">
         <article>
-          <Landmark size={28} />
+          <FaUniversity size={28} />
           <span>Empresa auditada</span>
           <strong>Inmobiliaria Terranova</strong>
         </article>
 
         <article>
-          <FileText size={28} />
+          <FaFileAlt size={28} />
           <span>Sistema evaluado</span>
           <strong>Portal de clientes</strong>
         </article>
 
         <article>
-          <LockKeyhole size={28} />
+          <FaLock size={28} />
           <span>Datos críticos</span>
           <strong>Contratos y datos financieros</strong>
         </article>
 
         <article>
-          <ShieldCheck size={28} />
+          <FaShieldAlt size={28} />
           <span>Ambiente</span>
           <strong>DVWA controlado</strong>
         </article>
@@ -526,13 +538,13 @@ function App() {
 
       <section className="mc-summary-row">
         <article>
-          <FileSearch size={30} />
+          <FaSearch size={30} />
           <span>Enfoque</span>
           <strong>Evaluación de vulnerabilidades</strong>
         </article>
 
         <article>
-          <ClipboardList size={30} />
+          <FaClipboardList size={30} />
           <span>Metodología</span>
           <strong>Evidencia, CVSS, matriz y controles</strong>
         </article>
@@ -567,7 +579,7 @@ function App() {
             className={vistaActiva === 'resumen' ? 'active' : ''}
             onClick={() => setVistaActiva('resumen')}
           >
-            <Eye size={18} />
+            <FaEye size={18} />
             Resumen ejecutivo
           </button>
 
@@ -576,7 +588,7 @@ function App() {
             className={vistaActiva === 'evidencia' ? 'active' : ''}
             onClick={() => setVistaActiva('evidencia')}
           >
-            <AlertTriangle size={18} />
+            <FaExclamationTriangle size={18} />
             Impacto y evidencia
           </button>
 
@@ -585,7 +597,7 @@ function App() {
             className={vistaActiva === 'acciones' ? 'active' : ''}
             onClick={() => setVistaActiva('acciones')}
           >
-            <Wrench size={18} />
+            <FaTools size={18} />
             Acciones sugeridas
           </button>
 
@@ -594,7 +606,7 @@ function App() {
             className={vistaActiva === 'completo' ? 'active' : ''}
             onClick={() => setVistaActiva('completo')}
           >
-            <BookOpen size={18} />
+            <FaBookOpen size={18} />
             Desarrollo completo
           </button>
         </div>
@@ -684,39 +696,6 @@ function App() {
           </section>
         )}
       </section>
-
-      <footer className="mc-footer">
-        <div className="mc-footer-content">
-          <div className="mc-footer-blocks">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-          <div className="mc-footer-text">
-            <span>Repositorio del proyecto</span>
-
-            <h3>Auditoría Web — Inmobiliaria Terranova</h3>
-
-            <p>
-              Acceso al repositorio utilizado para respaldar el desarrollo del
-              informe, los archivos Markdown y la aplicación React.
-            </p>
-          </div>
-
-          <a
-            className="mc-footer-link"
-            href="https://github.com/blesstyv/auditoria_gugjav"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Abrir repositorio de GitHub"
-          >
-            <FaGithub size={24} />
-            <strong>Abrir GitHub</strong>
-            <ExternalLink size={18} />
-          </a>
-        </div>
-      </footer>
     </main>
   )
 }

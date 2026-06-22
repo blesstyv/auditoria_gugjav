@@ -1,8 +1,9 @@
 function normalizeImageSrc(src) {
+  if (!src) return ''
+
   const cleanSrc = src.trim().replace(/^["']|["']$/g, '')
 
   if (
-    cleanSrc.startsWith('/') ||
     cleanSrc.startsWith('http://') ||
     cleanSrc.startsWith('https://') ||
     cleanSrc.startsWith('data:')
@@ -10,8 +11,23 @@ function normalizeImageSrc(src) {
     return cleanSrc
   }
 
+  if (cleanSrc.startsWith('/img_gugjav/')) {
+    return cleanSrc
+  }
+
   if (cleanSrc.includes('img_gugjav')) {
-    const fileName = cleanSrc.split('/').pop()
+    const normalized = cleanSrc.replaceAll('\\', '/')
+    const fileName = normalized.split('/').pop()
+    return `/img_gugjav/${fileName}`
+  }
+
+  if (
+    cleanSrc.endsWith('.png') ||
+    cleanSrc.endsWith('.jpg') ||
+    cleanSrc.endsWith('.jpeg') ||
+    cleanSrc.endsWith('.webp')
+  ) {
+    const fileName = cleanSrc.replaceAll('\\', '/').split('/').pop()
     return `/img_gugjav/${fileName}`
   }
 
@@ -77,6 +93,22 @@ function parseMarkdown(markdown) {
           type: 'image',
           alt: match[1],
           src: normalizeImageSrc(match[2]),
+        })
+      }
+
+      index += 1
+      continue
+    }
+
+    if (line.toLowerCase().startsWith('<img')) {
+      const srcMatch = line.match(/src=["']([^"']+)["']/i)
+      const altMatch = line.match(/alt=["']([^"']+)["']/i)
+
+      if (srcMatch) {
+        blocks.push({
+          type: 'image',
+          alt: altMatch ? altMatch[1] : 'Evidencia de auditoría',
+          src: normalizeImageSrc(srcMatch[1]),
         })
       }
 
@@ -183,7 +215,8 @@ function parseMarkdown(markdown) {
       !lines[index].trim().startsWith('- ') &&
       !/^\d+\.\s/.test(lines[index].trim()) &&
       !lines[index].trim().startsWith('```') &&
-      !lines[index].trim().startsWith('![')
+      !lines[index].trim().startsWith('![') &&
+      !lines[index].trim().toLowerCase().startsWith('<img')
     ) {
       paragraphLines.push(lines[index].trim())
       index += 1
@@ -198,27 +231,42 @@ function parseMarkdown(markdown) {
   return blocks
 }
 
+function MarkdownImage({ src, alt }) {
+  function handleImageError(event) {
+    event.currentTarget.style.display = 'none'
+
+    const message = event.currentTarget.parentElement.querySelector(
+      '.image-error-message',
+    )
+
+    if (message) {
+      message.style.display = 'block'
+    }
+  }
+
+  return (
+    <figure className="evidence-figure">
+      <img src={src} alt={alt} loading="lazy" onError={handleImageError} />
+
+      <div className="image-error-message">
+        No se pudo cargar la imagen: <strong>{src}</strong>
+      </div>
+
+      <figcaption>{alt}</figcaption>
+    </figure>
+  )
+}
+
 function MarkdownView({ markdown }) {
   const blocks = parseMarkdown(markdown || '')
 
   return (
     <div className="markdown-view">
       {blocks.map((block, index) => {
-        if (block.type === 'h1') {
-          return <h1 key={index}>{renderInline(block.content)}</h1>
-        }
-
-        if (block.type === 'h2') {
-          return <h2 key={index}>{renderInline(block.content)}</h2>
-        }
-
-        if (block.type === 'h3') {
-          return <h3 key={index}>{renderInline(block.content)}</h3>
-        }
-
-        if (block.type === 'p') {
-          return <p key={index}>{renderInline(block.content)}</p>
-        }
+        if (block.type === 'h1') return <h1 key={index}>{renderInline(block.content)}</h1>
+        if (block.type === 'h2') return <h2 key={index}>{renderInline(block.content)}</h2>
+        if (block.type === 'h3') return <h3 key={index}>{renderInline(block.content)}</h3>
+        if (block.type === 'p') return <p key={index}>{renderInline(block.content)}</p>
 
         if (block.type === 'ul') {
           return (
@@ -249,12 +297,7 @@ function MarkdownView({ markdown }) {
         }
 
         if (block.type === 'image') {
-          return (
-            <figure key={index} className="evidence-figure">
-              <img src={block.src} alt={block.alt} loading="lazy" />
-              <figcaption>{block.alt}</figcaption>
-            </figure>
-          )
+          return <MarkdownImage key={index} src={block.src} alt={block.alt} />
         }
 
         if (block.type === 'table') {
