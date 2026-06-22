@@ -256,11 +256,4 @@ El XSS reflejado afecta principalmente la interacción entre el cliente y el por
 
 La Inyección de comandos afecta directamente el servidor web y puede comprometer archivos internos, configuraciones, credenciales y disponibilidad del portal.
 
-## 17. Fuentes de apoyo utilizadas
 
-* NIST Cybersecurity Framework 2.0.
-* NIST SP 800-30 Rev. 1 — Guide for Conducting Risk Assessments.
-* OWASP Risk Rating Methodology.
-* OWASP Web Security Testing Guide.
-* FIRST CVSS v3.1 Specification.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.

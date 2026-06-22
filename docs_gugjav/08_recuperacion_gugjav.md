@@ -422,21 +422,3 @@ Después de un incidente, Inmobiliaria Terranova debe fortalecer sus controles.
 * Revisar contratos con proveedores tecnológicos.
 * Actualizar la matriz de riesgo.
 
-## 21. Conclusión
-
-El plan de recuperación y respuesta ante incidentes permite que Inmobiliaria Terranova actúe de forma ordenada frente a eventos de seguridad que puedan afectar su portal de clientes.
-
-Dado que el portal custodia contratos y datos financieros, la recuperación no debe limitarse a restaurar el servicio. También debe validar la integridad de la información, proteger la evidencia, revisar accesos, corregir la causa raíz y comunicar adecuadamente si existe afectación a clientes.
-
-Los escenarios de Inyección SQL, XSS reflejado e Inyección de comandos muestran que cada incidente requiere acciones específicas. Sin embargo, todos comparten un mismo objetivo: reducir el impacto, recuperar la operación de forma segura y fortalecer los controles para evitar que el problema se repita.
-
-Un proceso de recuperación bien definido mejora la resiliencia de la empresa, protege la confianza de los clientes y permite transformar una situación crítica en una oportunidad de mejora para la seguridad del portal.
-
-## 22. Fuentes de apoyo utilizadas
-
-* NIST SP 800-61 Rev. 2 — Computer Security Incident Handling Guide.
-* NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management.
-* NIST Cybersecurity Framework 2.0.
-* CISA — Incident Response Plan Basics.
-* OWASP Web Security Testing Guide.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.

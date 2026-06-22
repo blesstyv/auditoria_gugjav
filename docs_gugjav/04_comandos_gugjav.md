@@ -71,7 +71,7 @@ Esta ejecución utiliza una dirección IP local seguida de un separador de coman
 
 ### Captura de evidencia
 
-![Evidencia Inyección de Comandos](img_gugjav/comandos_gugjav.png)
+![Evidencia de Inyección de comandos en DVWA](/img_gugjav/comandos_gugjav.png)
 
 ### Resultado observado
 
@@ -368,22 +368,3 @@ Para reducir el impacto, Inmobiliaria Terranova debe contar con:
 
 La recuperación no debe limitarse a volver a levantar el servicio. También debe confirmar que la vulnerabilidad fue corregida y que el servidor no mantiene persistencia maliciosa.
 
-
-## 17. Conclusión del hallazgo
-
-La Inyección de comandos representa uno de los hallazgos más críticos para Inmobiliaria Terranova, debido a que puede comprometer directamente el servidor que soporta el portal de clientes.
-
-La prueba realizada en DVWA demuestra que una entrada mal controlada puede permitir la ejecución de comandos del sistema operativo. En un entorno productivo, esto podría exponer archivos internos, comprometer credenciales, afectar contratos, poner en riesgo datos financieros y provocar interrupción del portal.
-
-La medida de prevención más importante es evitar que entradas del usuario lleguen a comandos del sistema operativo. Esto debe complementarse con APIs seguras, listas blancas, mínimo privilegio, monitoreo, hardening del servidor y pruebas de seguridad.
-
-Por su impacto potencial sobre la infraestructura, la disponibilidad del portal y la información crítica del negocio, este hallazgo debe ser atendido con prioridad inmediata dentro del plan de remediación.
-
-## 18. Fuentes de apoyo utilizadas
-
-* OWASP — Web Security Testing Guide: Testing for Command Injection.
-* OWASP — OS Command Injection Defense Cheat Sheet.
-* OWASP — Injection Prevention Cheat Sheet.
-* FIRST — Common Vulnerability Scoring System v3.1 Specification.
-* FIRST — CVSS v3.1 Calculator.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.

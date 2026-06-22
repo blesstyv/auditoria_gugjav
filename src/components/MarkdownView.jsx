@@ -1,43 +1,44 @@
-function renderInline(text) {
-  const parts = []
-  const regex = /(\*\*[^*]+\*\*|`[^`]+`)/g
-  let lastIndex = 0
-  let match
+function normalizeImageSrc(src) {
+  const cleanSrc = src.trim().replace(/^["']|["']$/g, '')
 
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index))
-    }
-
-    const value = match[0]
-
-    if (value.startsWith('**')) {
-      parts.push(
-        <strong key={`${value}-${match.index}`}>
-          {value.slice(2, -2)}
-        </strong>,
-      )
-    }
-
-    if (value.startsWith('`')) {
-      parts.push(
-        <code key={`${value}-${match.index}`} className="inline-code">
-          {value.slice(1, -1)}
-        </code>,
-      )
-    }
-
-    lastIndex = regex.lastIndex
+  if (
+    cleanSrc.startsWith('/') ||
+    cleanSrc.startsWith('http://') ||
+    cleanSrc.startsWith('https://') ||
+    cleanSrc.startsWith('data:')
+  ) {
+    return cleanSrc
   }
 
-  if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex))
+  if (cleanSrc.includes('img_gugjav')) {
+    const fileName = cleanSrc.split('/').pop()
+    return `/img_gugjav/${fileName}`
   }
 
-  return parts
+  return cleanSrc
 }
 
-function parseMarkdown(markdown, imageMap = {}) {
+function renderInline(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g)
+
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>
+    }
+
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return (
+        <code key={index} className="inline-code">
+          {part.slice(1, -1)}
+        </code>
+      )
+    }
+
+    return part
+  })
+}
+
+function parseMarkdown(markdown) {
   const lines = markdown.split('\n')
   const blocks = []
   let index = 0
@@ -75,7 +76,7 @@ function parseMarkdown(markdown, imageMap = {}) {
         blocks.push({
           type: 'image',
           alt: match[1],
-          src: imageMap[match[2]] || match[2],
+          src: normalizeImageSrc(match[2]),
         })
       }
 
@@ -197,8 +198,8 @@ function parseMarkdown(markdown, imageMap = {}) {
   return blocks
 }
 
-function MarkdownView({ markdown, imageMap = {} }) {
-  const blocks = parseMarkdown(markdown, imageMap)
+function MarkdownView({ markdown }) {
+  const blocks = parseMarkdown(markdown || '')
 
   return (
     <div className="markdown-view">
@@ -250,7 +251,7 @@ function MarkdownView({ markdown, imageMap = {} }) {
         if (block.type === 'image') {
           return (
             <figure key={index} className="evidence-figure">
-              <img src={block.src} alt={block.alt} />
+              <img src={block.src} alt={block.alt} loading="lazy" />
               <figcaption>{block.alt}</figcaption>
             </figure>
           )
@@ -263,13 +264,13 @@ function MarkdownView({ markdown, imageMap = {} }) {
                 <tbody>
                   {block.rows.map((row, rowIndex) => (
                     <tr key={rowIndex}>
-                      {row.map((cell, cellIndex) => {
-                        if (rowIndex === 0) {
-                          return <th key={cellIndex}>{renderInline(cell)}</th>
-                        }
-
-                        return <td key={cellIndex}>{renderInline(cell)}</td>
-                      })}
+                      {row.map((cell, cellIndex) =>
+                        rowIndex === 0 ? (
+                          <th key={cellIndex}>{renderInline(cell)}</th>
+                        ) : (
+                          <td key={cellIndex}>{renderInline(cell)}</td>
+                        ),
+                      )}
                     </tr>
                   ))}
                 </tbody>

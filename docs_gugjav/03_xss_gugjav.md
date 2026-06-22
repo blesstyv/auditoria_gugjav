@@ -64,7 +64,7 @@ Esta ejecución permite comprobar si la aplicación refleja la entrada del usuar
 
 ### Captura de evidencia
 
-![Evidencia XSS Reflected](img_gugjav/xss_gugjav.png)
+![Evidencia de XSS reflejado en DVWA](/img_gugjav/xss_gugjav.png)
 
 ### Resultado observado
 
@@ -324,21 +324,3 @@ Si se detecta explotación real de XSS reflejado en el portal de clientes, la em
 10. Notificar a clientes si corresponde por posible afectación de datos.
 11. Documentar lecciones aprendidas y mejorar controles de desarrollo seguro.
 
-## 15. Conclusión del hallazgo
-
-El XSS reflejado representa un hallazgo de severidad técnica media, pero con riesgo alto para Inmobiliaria Terranova debido al tipo de información que sus clientes consultan en el portal.
-
-La prueba realizada en DVWA demuestra que una aplicación vulnerable puede reflejar una entrada del usuario y provocar la ejecución de código en el navegador. En el contexto del portal de clientes, esto podría permitir manipulación visual, suplantación de mensajes, afectación de sesiones y exposición indirecta de datos consultados por el usuario.
-
-La medida preventiva más importante es aplicar codificación de salida contextual, complementada con validación de entradas, sanitización segura cuando corresponda, Content Security Policy, cookies seguras, monitoreo y pruebas de seguridad.
-
-Este hallazgo debe corregirse con alta prioridad en cualquier sección del portal donde se refleje información ingresada por usuarios, especialmente en módulos relacionados con búsqueda de contratos, estados financieros, formularios de contacto o mensajes del sistema.
-
-## 16. Fuentes de apoyo utilizadas
-
-* OWASP — Cross-Site Scripting Prevention Cheat Sheet.
-* OWASP — Web Security Testing Guide: Testing for Reflected Cross Site Scripting.
-* OWASP — Cross Site Scripting.
-* FIRST — Common Vulnerability Scoring System v3.1 Calculator.
-* FIRST — CVSS v3.1 Specification.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.

@@ -267,26 +267,3 @@ Para verificar que los controles se mantienen en el tiempo, se proponen los sigu
 | Pruebas de seguridad antes de producción     | En cada liberación relevante.                   |
 | Respaldos probados                           | Al menos una prueba periódica documentada.      |
 | Hallazgos críticos corregidos                | Corrección inmediata según prioridad de riesgo. |
-
-# 14. Resultado esperado de la implementación
-
-La implementación de estos controles permitiría reducir el riesgo inicial identificado en la matriz.
-
-| Hallazgo              | Riesgo inicial | Resultado esperado                                                                               |
-| --------------------- | -------------- | ------------------------------------------------------------------------------------------------ |
-| Inyección SQL         | Crítico        | Reducir a riesgo medio si se aplican consultas parametrizadas, validación y mínimo privilegio.   |
-| XSS reflejado         | Alto           | Reducir a riesgo bajo o medio si se aplica codificación de salida, CSP y protección de sesiones. |
-| Inyección de comandos | Crítico        | Reducir a riesgo medio si se eliminan comandos inseguros, se aplican APIs seguras y hardening.   |
-
-El objetivo no es eliminar completamente el riesgo, ya que siempre puede existir riesgo residual. El objetivo es reducirlo a un nivel gestionable y aceptable para la operación del portal.
-
-# 15. Fuentes de apoyo utilizadas
-
-* OWASP — SQL Injection Prevention Cheat Sheet.
-* OWASP — Query Parameterization Cheat Sheet.
-* OWASP — Cross-Site Scripting Prevention Cheat Sheet.
-* OWASP — OS Command Injection Defense Cheat Sheet.
-* OWASP — Web Security Testing Guide.
-* NIST Cybersecurity Framework 2.0.
-* NIST SP 800-30 Rev. 1 — Guide for Conducting Risk Assessments.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.

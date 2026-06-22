@@ -70,7 +70,8 @@ Esta ejecución utiliza una condición lógica que siempre resulta verdadera. En
 
 ### Captura de evidencia
 
-![Evidencia SQL Injection](img_gugjav/sqli_gugjav.png)
+
+![Evidencia de Inyección SQL en DVWA](/img_gugjav/sqli_gugjav.png)
 
 ### Resultado observado
 
@@ -328,23 +329,3 @@ Se recomienda aplicar el siguiente plan de remediación:
 9. Notificar a clientes o autoridades si corresponde por exposición de datos personales.
 10. Documentar lecciones aprendidas y reforzar controles preventivos.
 
-
-## 16. Conclusión del hallazgo
-
-La Inyección SQL representa un hallazgo de alta severidad para Inmobiliaria Terranova, debido a que afecta directamente la base de datos del portal de clientes. En este sistema se custodian activos críticos, como contratos, datos financieros, credenciales e información personal.
-
-La prueba realizada en DVWA demuestra que una aplicación vulnerable puede permitir que una entrada manipulada altere la lógica de una consulta SQL. Trasladado al contexto del portal de clientes, este comportamiento podría provocar exposición masiva de información, manipulación de registros o afectación de procesos inmobiliarios.
-
-La medida preventiva más importante es implementar consultas parametrizadas en todas las operaciones de base de datos. Esta acción debe complementarse con validación de entradas, mínimo privilegio, manejo seguro de errores, monitoreo, revisión de código y pruebas de seguridad.
-
-Por su impacto potencial sobre contratos y datos financieros, este hallazgo debe ser tratado con prioridad inmediata dentro del plan de remediación de Inmobiliaria Terranova.
-
-
-
-## 17. Fuentes de apoyo utilizadas
-
-* OWASP — SQL Injection Prevention Cheat Sheet.
-* OWASP — Web Security Testing Guide: Testing for SQL Injection.
-* FIRST — Common Vulnerability Scoring System v3.1 Specification.
-* FIRST — CVSS v3.1 Calculator.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.

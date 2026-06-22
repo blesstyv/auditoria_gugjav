@@ -262,25 +262,3 @@ El riesgo residual es el nivel de riesgo que permanece después de aplicar contr
 
 El riesgo residual no desaparece por completo, pero puede reducirse a niveles aceptables si los controles son implementados, probados y monitoreados.
 
-
-
-## 17. Conclusión de la matriz
-
-La matriz de riesgo evidencia que el portal de clientes de Inmobiliaria Terranova presenta hallazgos de prioridad alta y crítica. La Inyección SQL y la Inyección de comandos son los riesgos más relevantes, debido a su posible impacto sobre contratos, datos financieros, base de datos, servidor y continuidad operacional.
-
-El XSS reflejado, aunque presenta una severidad técnica menor, también debe ser corregido con prioridad alta, ya que puede afectar la confianza del cliente, la sesión del usuario y la integridad de la interacción con el portal.
-
-La priorización permite concluir que Inmobiliaria Terranova debe enfocar sus esfuerzos iniciales en proteger la infraestructura del servidor y la base de datos, para luego reforzar la seguridad del lado cliente y la experiencia del usuario.
-
-La matriz permite transformar los hallazgos técnicos en decisiones de gestión, facilitando la planificación de controles, remediación y recuperación ante incidentes.
-
-
-## 18. Fuentes de apoyo utilizadas
-
-* NIST SP 800-30 Rev. 1 — Guide for Conducting Risk Assessments.
-* NIST Cybersecurity Framework 2.0.
-* OWASP Risk Rating Methodology.
-* OWASP Web Security Testing Guide.
-* FIRST — Common Vulnerability Scoring System v3.1 Specification.
-* FIRST — CVSS v3.1 Calculator.
-* Material de clases de la Unidad 3 — Evaluación de Vulnerabilidades y Matriz de Riesgo.
