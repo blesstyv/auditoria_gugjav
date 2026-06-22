@@ -16,6 +16,13 @@ import {
   FileText,
   Boxes,
   ExternalLink,
+  AlertTriangle,
+  Target,
+  CheckCircle2,
+  Eye,
+  Wrench,
+  BookOpen,
+  ShieldAlert,
 } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 
@@ -39,83 +46,211 @@ const secciones = [
     numero: '01',
     titulo: 'Resumen ejecutivo',
     subtitulo: 'Contexto general de la auditoría',
+    tipo: 'gestion',
+    nivel: 'Base',
     icono: Building2,
     markdown: resumenMd,
+    enfoque: 'Presentar el alcance, objetivo y contexto de la auditoría aplicada al portal de clientes.',
+    impacto: 'Permite entender por qué el portal de Inmobiliaria Terranova requiere evaluación de seguridad.',
+    activos: ['Portal de clientes', 'Contratos', 'Datos financieros'],
+    acciones: [
+      'Definir alcance autorizado de la auditoría.',
+      'Identificar datos críticos del negocio.',
+      'Relacionar el análisis técnico con el contexto inmobiliario.',
+    ],
   },
   {
     id: 'sqli',
     numero: '02',
     titulo: 'Inyección SQL',
     subtitulo: 'Riesgo sobre base de datos',
+    tipo: 'hallazgo',
+    nivel: 'Crítico',
     icono: Database,
     markdown: sqliMd,
+    evidencia: '/img_gugjav/sqli_gugjav.png',
+    enfoque: 'Analizar cómo una entrada manipulada podría alterar consultas a la base de datos.',
+    impacto: 'Puede exponer o modificar contratos, datos financieros, credenciales y registros de clientes.',
+    activos: ['Base de datos', 'Contratos', 'Datos financieros', 'Credenciales'],
+    acciones: [
+      'Implementar consultas parametrizadas.',
+      'Validar entradas desde el servidor.',
+      'Aplicar mínimo privilegio en la cuenta de base de datos.',
+      'Ocultar errores técnicos al usuario final.',
+    ],
   },
   {
     id: 'xss',
     numero: '03',
     titulo: 'XSS reflejado',
     subtitulo: 'Riesgo sobre sesión y navegador',
+    tipo: 'hallazgo',
+    nivel: 'Alto',
     icono: Code2,
     markdown: xssMd,
+    evidencia: '/img_gugjav/xss_gugjav.png',
+    enfoque: 'Evaluar ejecución de código en el navegador mediante datos reflejados por la aplicación.',
+    impacto: 'Puede afectar sesiones, confianza del cliente y visualización segura de información del portal.',
+    activos: ['Sesión de usuario', 'Interfaz del portal', 'Confianza institucional'],
+    acciones: [
+      'Aplicar codificación de salida contextual.',
+      'Validar campos reflejados.',
+      'Configurar Content Security Policy.',
+      'Proteger cookies con HttpOnly, Secure y SameSite.',
+    ],
   },
   {
     id: 'comandos',
     numero: '04',
     titulo: 'Inyección de comandos',
     subtitulo: 'Riesgo sobre servidor',
+    tipo: 'hallazgo',
+    nivel: 'Crítico',
     icono: Server,
     markdown: comandosMd,
+    evidencia: '/img_gugjav/comandos_gugjav.png',
+    enfoque: 'Analizar el riesgo de ejecutar instrucciones no autorizadas en el servidor.',
+    impacto: 'Puede comprometer infraestructura, archivos internos, configuraciones y continuidad operacional.',
+    activos: ['Servidor web', 'Sistema operativo', 'Archivos internos', 'Disponibilidad'],
+    acciones: [
+      'Eliminar ejecución directa de comandos con entradas de usuario.',
+      'Usar APIs seguras en lugar de shell.',
+      'Aplicar listas blancas estrictas.',
+      'Revisar permisos y hardening del servidor.',
+    ],
   },
   {
     id: 'activos',
     numero: '05',
     titulo: 'Activos de información',
     subtitulo: 'Contratos, datos y sistemas',
+    tipo: 'gestion',
+    nivel: 'Alto',
     icono: FileKey2,
     markdown: activosMd,
+    enfoque: 'Identificar qué activos deben protegerse y qué tan críticos son para la operación.',
+    impacto: 'Ordena la auditoría desde el valor real de los datos y sistemas del negocio inmobiliario.',
+    activos: ['Contratos digitales', 'Datos financieros', 'Portal', 'Respaldos', 'Logs'],
+    acciones: [
+      'Clasificar activos por confidencialidad, integridad y disponibilidad.',
+      'Priorizar contratos y datos financieros.',
+      'Relacionar cada activo con los hallazgos técnicos.',
+    ],
   },
   {
     id: 'matriz',
     numero: '06',
     titulo: 'Matriz de riesgo',
     subtitulo: 'Probabilidad e impacto',
+    tipo: 'gestion',
+    nivel: 'Crítico',
     icono: Flame,
     markdown: matrizMd,
+    enfoque: 'Priorizar los hallazgos según probabilidad, impacto y efecto sobre el negocio.',
+    impacto: 'Permite decidir qué se corrige primero y justificar la prioridad de remediación.',
+    activos: ['Base de datos', 'Servidor', 'Portal', 'Sesiones'],
+    acciones: [
+      'Priorizar Inyección de comandos e Inyección SQL.',
+      'Tratar XSS reflejado como riesgo alto.',
+      'Definir riesgo residual esperado.',
+      'Usar la matriz como criterio de decisión.',
+    ],
   },
   {
     id: 'controles',
     numero: '07',
     titulo: 'Controles',
     subtitulo: 'Defensa por capas',
+    tipo: 'gestion',
+    nivel: 'Prioritario',
     icono: LockKeyhole,
     markdown: controlesMd,
+    enfoque: 'Transformar los hallazgos en medidas concretas de prevención, detección y respuesta.',
+    impacto: 'Reduce la probabilidad de explotación y fortalece la seguridad del portal.',
+    activos: ['Aplicación', 'Base de datos', 'Servidor', 'Usuarios'],
+    acciones: [
+      'Aplicar controles preventivos por vulnerabilidad.',
+      'Agregar monitoreo de eventos anómalos.',
+      'Fortalecer desarrollo seguro.',
+      'Documentar evidencias de implementación.',
+    ],
   },
   {
     id: 'recuperacion',
     numero: '08',
     titulo: 'Recuperación',
     subtitulo: 'Respuesta ante incidentes',
+    tipo: 'gestion',
+    nivel: 'Prioritario',
     icono: RotateCcw,
     markdown: recuperacionMd,
+    enfoque: 'Definir cómo contener, erradicar y recuperar el portal después de un incidente.',
+    impacto: 'Mejora la continuidad operacional y evita restauraciones inseguras.',
+    activos: ['Respaldos', 'Servidor', 'Base de datos', 'Contratos'],
+    acciones: [
+      'Preservar evidencia antes de modificar sistemas.',
+      'Contener el punto vulnerable.',
+      'Validar integridad antes de volver a producción.',
+      'Registrar lecciones aprendidas.',
+    ],
   },
   {
     id: 'prompts',
     numero: '09',
     titulo: 'Bitácora IA',
     subtitulo: 'Uso crítico de IA como agente',
+    tipo: 'cierre',
+    nivel: 'Evidencia',
     icono: Bot,
     markdown: promptsMd,
+    enfoque: 'Demostrar uso responsable de IA como apoyo técnico y no como reemplazo del análisis.',
+    impacto: 'Evidencia criterio del estudiante, iteración, revisión y toma de decisiones.',
+    activos: ['Proceso de trabajo', 'Criterio técnico', 'Documentación'],
+    acciones: [
+      'Mostrar prompts contextualizados.',
+      'Explicar respuesta esperada.',
+      'Indicar ajustes realizados por el estudiante.',
+      'Diferenciar uso de IA como agente y no como chatbot genérico.',
+    ],
   },
 ]
 
+const filtros = [
+  { id: 'todos', nombre: 'Todos' },
+  { id: 'hallazgo', nombre: 'Hallazgos técnicos' },
+  { id: 'gestion', nombre: 'Gestión del riesgo' },
+  { id: 'cierre', nombre: 'Cierre y evidencia IA' },
+]
+
+function nivelClass(nivel) {
+  const value = nivel.toLowerCase()
+
+  if (value.includes('crítico')) return 'critical'
+  if (value.includes('alto')) return 'high'
+  if (value.includes('prioritario')) return 'priority'
+  return 'base'
+}
+
 function App() {
   const [seccionActiva, setSeccionActiva] = useState(secciones[0])
+  const [vistaActiva, setVistaActiva] = useState('resumen')
+  const [filtroActivo, setFiltroActivo] = useState('todos')
   const documentRef = useRef(null)
 
   const IconoActivo = seccionActiva.icono
 
+  const seccionesFiltradas =
+    filtroActivo === 'todos'
+      ? secciones
+      : secciones.filter((seccion) => seccion.tipo === filtroActivo)
+
+  const hallazgosCriticos = secciones.filter(
+    (seccion) => seccion.nivel === 'Crítico',
+  ).length
+
   function cambiarSeccion(seccion) {
     setSeccionActiva(seccion)
+    setVistaActiva('resumen')
 
     setTimeout(() => {
       documentRef.current?.scrollIntoView({
@@ -168,14 +303,13 @@ function App() {
 
           <p>
             Informe técnico aplicado al portal de clientes, orientado a
-            identificar vulnerabilidades, analizar evidencia, priorizar riesgos y
-            proponer controles de seguridad para proteger contratos y datos
-            financieros.
+            identificar vulnerabilidades, priorizar riesgos y proponer controles
+            de seguridad para proteger contratos y datos financieros.
           </p>
 
           <div className="mc-hero-actions">
-            <button type="button" onClick={() => cambiarSeccion(secciones[0])}>
-              Ver informe
+            <button type="button" onClick={() => cambiarSeccion(secciones[1])}>
+              Ver hallazgos críticos
             </button>
 
             <button type="button" onClick={() => cambiarSeccion(secciones[5])}>
@@ -187,30 +321,71 @@ function App() {
         <aside className="mc-hero-panel">
           <ShieldCheck size={54} />
 
-          <span>Documento técnico</span>
+          <span>Panel ejecutivo</span>
 
-          <strong>Auditoría formal</strong>
+          <strong>Auditoría revisable</strong>
 
           <p>
-            Desarrollo académico, ético y defensivo en ambiente controlado DVWA.
+            Primero se muestran conclusiones, evidencias y acciones. El
+            desarrollo completo queda disponible solo cuando se necesita.
           </p>
         </aside>
       </section>
 
+      <section className="audit-dashboard">
+        <article>
+          <ShieldAlert size={32} />
+          <span>Hallazgos críticos</span>
+          <strong>{hallazgosCriticos}</strong>
+          <p>SQL Injection e Inyección de comandos requieren prioridad alta.</p>
+        </article>
+
+        <article>
+          <Target size={32} />
+          <span>Activo principal</span>
+          <strong>Portal de clientes</strong>
+          <p>Concentra contratos, datos financieros y acceso de usuarios.</p>
+        </article>
+
+        <article>
+          <CheckCircle2 size={32} />
+          <span>Resultado esperado</span>
+          <strong>Reducir riesgo</strong>
+          <p>Aplicar controles, recuperación y seguimiento documentado.</p>
+        </article>
+      </section>
+
       <section className="mc-index-section">
         <div className="mc-index-heading">
-          <span>Índice de la auditoría</span>
+          <span>Índice interactivo</span>
 
-          <h2>Puntos tratados en el informe</h2>
+          <h2>Selecciona qué revisar</h2>
 
           <p>
-            Selecciona un capítulo para revisar el análisis correspondiente de la
-            auditoría realizada al portal de clientes de Inmobiliaria Terranova.
+            La auditoría está organizada por capítulos. Puedes filtrar por
+            hallazgos técnicos, gestión del riesgo o cierre del trabajo.
           </p>
         </div>
 
-        <div className="mc-index-grid">
-          {secciones.map((seccion) => {
+        <div className="audit-filter-row">
+          {filtros.map((filtro) => (
+            <button
+              key={filtro.id}
+              type="button"
+              className={
+                filtroActivo === filtro.id
+                  ? 'audit-filter active'
+                  : 'audit-filter'
+              }
+              onClick={() => setFiltroActivo(filtro.id)}
+            >
+              {filtro.nombre}
+            </button>
+          ))}
+        </div>
+
+        <div className="mc-index-grid compact">
+          {seccionesFiltradas.map((seccion) => {
             const Icono = seccion.icono
 
             return (
@@ -254,7 +429,7 @@ function App() {
         </article>
 
         <article>
-          <FileKey2 size={28} />
+          <LockKeyhole size={28} />
           <span>Datos críticos</span>
           <strong>Contratos y datos financieros</strong>
         </article>
@@ -264,36 +439,6 @@ function App() {
           <span>Ambiente</span>
           <strong>DVWA controlado</strong>
         </article>
-      </section>
-
-      <section className="mc-chapter-grid">
-        {secciones.map((seccion) => {
-          const Icono = seccion.icono
-
-          return (
-            <button
-              key={seccion.id}
-              type="button"
-              className={
-                seccionActiva.id === seccion.id
-                  ? 'mc-chapter-card active'
-                  : 'mc-chapter-card'
-              }
-              onClick={() => cambiarSeccion(seccion)}
-            >
-              <span className="mc-card-number">{seccion.numero}</span>
-
-              <div className="mc-card-icon">
-                <Icono size={30} />
-              </div>
-
-              <div>
-                <h4>{seccion.titulo}</h4>
-                <p>{seccion.subtitulo}</p>
-              </div>
-            </button>
-          )
-        })}
       </section>
 
       <section className="mc-summary-row">
@@ -326,10 +471,117 @@ function App() {
           <h3>{seccionActiva.titulo}</h3>
           <p>{seccionActiva.subtitulo}</p>
         </div>
+
+        <strong className={`audit-risk-badge ${nivelClass(seccionActiva.nivel)}`}>
+          {seccionActiva.nivel}
+        </strong>
       </section>
 
-      <section key={seccionActiva.id} className="mc-document">
-        <MarkdownView markdown={seccionActiva.markdown} />
+      <section className="audit-workbench">
+        <div className="audit-tabs">
+          <button
+            type="button"
+            className={vistaActiva === 'resumen' ? 'active' : ''}
+            onClick={() => setVistaActiva('resumen')}
+          >
+            <Eye size={18} />
+            Resumen ejecutivo
+          </button>
+
+          <button
+            type="button"
+            className={vistaActiva === 'evidencia' ? 'active' : ''}
+            onClick={() => setVistaActiva('evidencia')}
+          >
+            <AlertTriangle size={18} />
+            Evidencia / impacto
+          </button>
+
+          <button
+            type="button"
+            className={vistaActiva === 'acciones' ? 'active' : ''}
+            onClick={() => setVistaActiva('acciones')}
+          >
+            <Wrench size={18} />
+            Acciones sugeridas
+          </button>
+
+          <button
+            type="button"
+            className={vistaActiva === 'completo' ? 'active' : ''}
+            onClick={() => setVistaActiva('completo')}
+          >
+            <BookOpen size={18} />
+            Desarrollo completo
+          </button>
+        </div>
+
+        {vistaActiva === 'resumen' && (
+          <section className="audit-executive-panel">
+            <article className="audit-main-card">
+              <span>Qué se revisa</span>
+              <h3>{seccionActiva.enfoque}</h3>
+              <p>{seccionActiva.impacto}</p>
+            </article>
+
+            <article className="audit-assets-card">
+              <span>Activos relacionados</span>
+
+              <div>
+                {seccionActiva.activos.map((activo) => (
+                  <strong key={activo}>{activo}</strong>
+                ))}
+              </div>
+            </article>
+          </section>
+        )}
+
+        {vistaActiva === 'evidencia' && (
+          <section className="audit-evidence-panel">
+            <article>
+              <span>Impacto para la empresa</span>
+              <h3>{seccionActiva.impacto}</h3>
+              <p>
+                Esta vista resume el valor del hallazgo sin obligar a leer todo
+                el desarrollo técnico. Para revisar el análisis completo, usa la
+                pestaña “Desarrollo completo”.
+              </p>
+            </article>
+
+            {seccionActiva.evidencia ? (
+              <figure className="audit-evidence-preview">
+                <img
+                  src={seccionActiva.evidencia}
+                  alt={`Evidencia de ${seccionActiva.titulo}`}
+                />
+                <figcaption>
+                  Evidencia asociada al capítulo {seccionActiva.numero}:{' '}
+                  {seccionActiva.titulo}
+                </figcaption>
+              </figure>
+            ) : (
+              <article className="audit-no-evidence">
+              </article>
+            )}
+          </section>
+        )}
+
+        {vistaActiva === 'acciones' && (
+          <section className="audit-actions-panel">
+            {seccionActiva.acciones.map((accion, index) => (
+              <article key={accion}>
+                <span>{index + 1}</span>
+                <p>{accion}</p>
+              </article>
+            ))}
+          </section>
+        )}
+
+        {vistaActiva === 'completo' && (
+          <section key={seccionActiva.id} className="mc-document">
+            <MarkdownView markdown={seccionActiva.markdown} />
+          </section>
+        )}
       </section>
 
       <footer className="mc-footer">
