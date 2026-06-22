@@ -50,13 +50,20 @@ const secciones = [
     nivel: 'Base',
     icono: Building2,
     markdown: resumenMd,
-    enfoque: 'Presentar el alcance, objetivo y contexto de la auditoría aplicada al portal de clientes.',
-    impacto: 'Permite entender por qué el portal de Inmobiliaria Terranova requiere evaluación de seguridad.',
+    enfoque:
+      'Presenta el objetivo, alcance y contexto general de la auditoría aplicada al portal de clientes de Inmobiliaria Terranova.',
+    lectura:
+      'Se presenta la entrada ejecutiva del informe. Explica por qué se evalúa el portal, qué sistema se revisa, qué datos son críticos y bajo qué condiciones se realiza la auditoría. Es importante porque permite comprender que el análisis no se limita a pruebas técnicas, sino que responde a la necesidad de proteger información sensible del negocio inmobiliario.',
+    impacto:
+      'Permite orientar la auditoría hacia la protección de contratos, datos financieros, credenciales y confianza de los clientes.',
+    decision:
+      'Usar este capítulo para presentar formalmente el trabajo antes de revisar vulnerabilidades específicas.',
     activos: ['Portal de clientes', 'Contratos', 'Datos financieros'],
     acciones: [
-      'Definir alcance autorizado de la auditoría.',
-      'Identificar datos críticos del negocio.',
-      'Relacionar el análisis técnico con el contexto inmobiliario.',
+      'Definir el sistema evaluado.',
+      'Establecer el alcance de la auditoría.',
+      'Identificar los datos críticos del portal.',
+      'Relacionar la auditoría con el riesgo del negocio inmobiliario.',
     ],
   },
   {
@@ -69,14 +76,29 @@ const secciones = [
     icono: Database,
     markdown: sqliMd,
     evidencia: '/img_gugjav/sqli_gugjav.png',
-    enfoque: 'Analizar cómo una entrada manipulada podría alterar consultas a la base de datos.',
-    impacto: 'Puede exponer o modificar contratos, datos financieros, credenciales y registros de clientes.',
+    cvss: {
+      version: 'CVSS v3.1',
+      puntaje: '8.1',
+      severidad: 'Alto',
+      vector: 'CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L',
+      lectura:
+        'El vector considera explotación por red, baja complejidad, privilegios bajos, sin interacción del usuario y alto impacto sobre confidencialidad e integridad.',
+    },
+    enfoque:
+      'Analiza cómo una entrada manipulada puede alterar consultas SQL y exponer información almacenada en la base de datos.',
+    lectura:
+      'Este hallazgo es uno de los más relevantes porque apunta directamente al núcleo de información del portal. En una inmobiliaria, la base de datos puede contener contratos, estados de pago, datos financieros, credenciales y registros personales de clientes. Por eso, aunque la prueba se realiza en DVWA, el riesgo se interpreta desde el impacto que tendría sobre Inmobiliaria Terranova.',
+    impacto:
+      'Puede permitir exposición, modificación o extracción de contratos, datos financieros, credenciales y registros de clientes.',
+    decision:
+      'Debe corregirse con prioridad crítica mediante consultas parametrizadas, validación de entradas y mínimo privilegio.',
     activos: ['Base de datos', 'Contratos', 'Datos financieros', 'Credenciales'],
     acciones: [
       'Implementar consultas parametrizadas.',
+      'Eliminar concatenación directa de datos en consultas SQL.',
       'Validar entradas desde el servidor.',
-      'Aplicar mínimo privilegio en la cuenta de base de datos.',
-      'Ocultar errores técnicos al usuario final.',
+      'Reducir privilegios de la cuenta conectada a la base de datos.',
+      'Evitar mostrar errores técnicos al usuario final.',
     ],
   },
   {
@@ -89,14 +111,29 @@ const secciones = [
     icono: Code2,
     markdown: xssMd,
     evidencia: '/img_gugjav/xss_gugjav.png',
-    enfoque: 'Evaluar ejecución de código en el navegador mediante datos reflejados por la aplicación.',
-    impacto: 'Puede afectar sesiones, confianza del cliente y visualización segura de información del portal.',
+    cvss: {
+      version: 'CVSS v3.1',
+      puntaje: '6.1',
+      severidad: 'Medio',
+      vector: 'CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N',
+      lectura:
+        'El vector considera explotación por red, baja complejidad, sin privilegios, pero requiere interacción del usuario. El alcance cambia porque afecta el navegador de la víctima.',
+    },
+    enfoque:
+      'Evalúa el riesgo de ejecutar código en el navegador cuando la aplicación refleja entradas del usuario sin tratamiento seguro.',
+    lectura:
+      'Este apartado se centra en la relación entre el portal y sus usuarios. Aunque XSS no afecta directamente la base de datos como SQL Injection, puede comprometer la sesión del cliente, alterar mensajes visibles, generar engaños y afectar la confianza en el portal. En un portal inmobiliario, la confianza visual y funcional es clave porque los clientes pueden revisar documentos, pagos o información contractual.',
+    impacto:
+      'Puede afectar sesiones, confianza del cliente, integridad visual del portal y seguridad de la interacción del usuario.',
+    decision:
+      'Debe tratarse con prioridad alta mediante codificación de salida, validación de entradas, protección de cookies y Content Security Policy.',
     activos: ['Sesión de usuario', 'Interfaz del portal', 'Confianza institucional'],
     acciones: [
       'Aplicar codificación de salida contextual.',
-      'Validar campos reflejados.',
+      'Validar campos reflejados en pantalla.',
       'Configurar Content Security Policy.',
       'Proteger cookies con HttpOnly, Secure y SameSite.',
+      'Evitar insertar HTML dinámico sin sanitización.',
     ],
   },
   {
@@ -109,14 +146,29 @@ const secciones = [
     icono: Server,
     markdown: comandosMd,
     evidencia: '/img_gugjav/comandos_gugjav.png',
-    enfoque: 'Analizar el riesgo de ejecutar instrucciones no autorizadas en el servidor.',
-    impacto: 'Puede comprometer infraestructura, archivos internos, configuraciones y continuidad operacional.',
+    cvss: {
+      version: 'CVSS v3.1',
+      puntaje: '8.8',
+      severidad: 'Alto',
+      vector: 'CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H',
+      lectura:
+        'El vector refleja explotación por red, baja complejidad, privilegios bajos, sin interacción del usuario y alto impacto sobre confidencialidad, integridad y disponibilidad.',
+    },
+    enfoque:
+      'Analiza el riesgo de que entradas del usuario sean interpretadas como comandos del sistema operativo.',
+    lectura:
+      'Este hallazgo se enfoca en la infraestructura que sostiene el portal. A diferencia de XSS, que ocurre en el navegador, la Inyección de comandos puede afectar directamente el servidor, sus archivos, configuraciones, credenciales y disponibilidad. En el caso de Inmobiliaria Terranova, este riesgo puede comprometer la continuidad operacional del portal de clientes.',
+    impacto:
+      'Puede comprometer servidor web, archivos internos, configuraciones, credenciales, disponibilidad del portal y continuidad operacional.',
+    decision:
+      'Debe corregirse de forma prioritaria, eliminando ejecución directa de comandos y reemplazando esas funciones por APIs seguras.',
     activos: ['Servidor web', 'Sistema operativo', 'Archivos internos', 'Disponibilidad'],
     acciones: [
       'Eliminar ejecución directa de comandos con entradas de usuario.',
-      'Usar APIs seguras en lugar de shell.',
+      'Usar APIs seguras en lugar de shell del sistema.',
       'Aplicar listas blancas estrictas.',
-      'Revisar permisos y hardening del servidor.',
+      'Revisar permisos del servicio web.',
+      'Aplicar hardening del servidor.',
     ],
   },
   {
@@ -128,13 +180,20 @@ const secciones = [
     nivel: 'Alto',
     icono: FileKey2,
     markdown: activosMd,
-    enfoque: 'Identificar qué activos deben protegerse y qué tan críticos son para la operación.',
-    impacto: 'Ordena la auditoría desde el valor real de los datos y sistemas del negocio inmobiliario.',
+    enfoque:
+      'Identifica los activos de información que deben protegerse dentro del portal de clientes.',
+    lectura:
+      'Este capítulo permite entender qué elementos tienen valor para la empresa. No todos los activos tienen el mismo nivel de criticidad: los contratos y datos financieros requieren mayor protección que otros elementos secundarios. La sección ayuda a relacionar cada vulnerabilidad con un activo concreto, evitando que la auditoría quede como un análisis técnico aislado.',
+    impacto:
+      'Permite priorizar la protección de contratos, datos financieros, credenciales, respaldos, registros de actividad y servicios críticos.',
+    decision:
+      'Usar esta sección como base para justificar la matriz de riesgo y la priorización de controles.',
     activos: ['Contratos digitales', 'Datos financieros', 'Portal', 'Respaldos', 'Logs'],
     acciones: [
-      'Clasificar activos por confidencialidad, integridad y disponibilidad.',
+      'Clasificar activos según confidencialidad, integridad y disponibilidad.',
       'Priorizar contratos y datos financieros.',
-      'Relacionar cada activo con los hallazgos técnicos.',
+      'Relacionar activos con vulnerabilidades detectadas.',
+      'Definir requerimientos mínimos de protección.',
     ],
   },
   {
@@ -146,14 +205,20 @@ const secciones = [
     nivel: 'Crítico',
     icono: Flame,
     markdown: matrizMd,
-    enfoque: 'Priorizar los hallazgos según probabilidad, impacto y efecto sobre el negocio.',
-    impacto: 'Permite decidir qué se corrige primero y justificar la prioridad de remediación.',
+    enfoque:
+      'Consolida los hallazgos y los ordena según probabilidad, impacto y prioridad de tratamiento.',
+    lectura:
+      'La matriz transforma los hallazgos técnicos en decisiones de gestión. Su función es responder qué vulnerabilidad debe corregirse primero, por qué se considera más urgente y qué efecto tendría sobre los activos críticos. En esta auditoría, SQL Injection e Inyección de comandos se ubican como riesgos críticos por su impacto sobre base de datos, servidor y continuidad operacional.',
+    impacto:
+      'Permite priorizar acciones de remediación y justificar técnicamente las decisiones de seguridad.',
+    decision:
+      'Usar la matriz como criterio central para definir el orden de corrección y el tratamiento del riesgo.',
     activos: ['Base de datos', 'Servidor', 'Portal', 'Sesiones'],
     acciones: [
       'Priorizar Inyección de comandos e Inyección SQL.',
       'Tratar XSS reflejado como riesgo alto.',
       'Definir riesgo residual esperado.',
-      'Usar la matriz como criterio de decisión.',
+      'Usar probabilidad e impacto como criterio de decisión.',
     ],
   },
   {
@@ -165,13 +230,19 @@ const secciones = [
     nivel: 'Prioritario',
     icono: LockKeyhole,
     markdown: controlesMd,
-    enfoque: 'Transformar los hallazgos en medidas concretas de prevención, detección y respuesta.',
-    impacto: 'Reduce la probabilidad de explotación y fortalece la seguridad del portal.',
+    enfoque:
+      'Propone controles preventivos, detectivos y de respuesta para reducir los riesgos identificados.',
+    lectura:
+      'Este apartado convierte el diagnóstico en acciones concretas. La auditoría no queda solo en indicar fallas, sino que propone medidas técnicas y organizacionales para proteger el portal. Los controles se organizan por vulnerabilidad y también de forma transversal: validación, mínimo privilegio, monitoreo, desarrollo seguro y protección de datos.',
+    impacto:
+      'Reduce la probabilidad de explotación y mejora la capacidad de detección y respuesta ante incidentes.',
+    decision:
+      'Implementar controles por capas y documentar evidencia de cumplimiento.',
     activos: ['Aplicación', 'Base de datos', 'Servidor', 'Usuarios'],
     acciones: [
       'Aplicar controles preventivos por vulnerabilidad.',
       'Agregar monitoreo de eventos anómalos.',
-      'Fortalecer desarrollo seguro.',
+      'Fortalecer prácticas de desarrollo seguro.',
       'Documentar evidencias de implementación.',
     ],
   },
@@ -184,8 +255,14 @@ const secciones = [
     nivel: 'Prioritario',
     icono: RotateCcw,
     markdown: recuperacionMd,
-    enfoque: 'Definir cómo contener, erradicar y recuperar el portal después de un incidente.',
-    impacto: 'Mejora la continuidad operacional y evita restauraciones inseguras.',
+    enfoque:
+      'Define cómo actuar después de un incidente para contener, erradicar y recuperar el portal de forma segura.',
+    lectura:
+      'Este capítulo evita que la auditoría se limite a prevención. También establece qué hacer si un incidente ocurre: preservar evidencia, contener el punto vulnerable, revisar accesos, validar respaldos y restaurar operación de forma controlada. Esto es clave para una empresa que custodia contratos y datos financieros.',
+    impacto:
+      'Mejora la continuidad operacional, protege evidencia y reduce el riesgo de restaurar sistemas comprometidos.',
+    decision:
+      'Aplicar fases de respuesta: preparación, detección, contención, erradicación, recuperación y lecciones aprendidas.',
     activos: ['Respaldos', 'Servidor', 'Base de datos', 'Contratos'],
     acciones: [
       'Preservar evidencia antes de modificar sistemas.',
@@ -203,8 +280,14 @@ const secciones = [
     nivel: 'Evidencia',
     icono: Bot,
     markdown: promptsMd,
-    enfoque: 'Demostrar uso responsable de IA como apoyo técnico y no como reemplazo del análisis.',
-    impacto: 'Evidencia criterio del estudiante, iteración, revisión y toma de decisiones.',
+    enfoque:
+      'Evidencia cómo se utilizó inteligencia artificial como apoyo técnico y metodológico durante el desarrollo.',
+    lectura:
+      'Este apartado demuestra que la IA no fue utilizada para reemplazar el análisis del estudiante, sino como agente de apoyo. Los prompts muestran contexto, decisiones técnicas, revisión de rúbrica, ajustes de estructura y validación del contenido. Esto fortalece la trazabilidad del proceso de trabajo.',
+    impacto:
+      'Permite demostrar criterio, iteración, revisión y uso responsable de herramientas de IA.',
+    decision:
+      'Usar la bitácora como evidencia del proceso de construcción del informe.',
     activos: ['Proceso de trabajo', 'Criterio técnico', 'Documentación'],
     acciones: [
       'Mostrar prompts contextualizados.',
@@ -326,8 +409,8 @@ function App() {
           <strong>Auditoría revisable</strong>
 
           <p>
-            Primero se muestran conclusiones, evidencias y acciones. El
-            desarrollo completo queda disponible solo cuando se necesita.
+            Primero se muestran conclusiones, impacto y acciones. El desarrollo
+            completo queda disponible solo cuando se necesita.
           </p>
         </aside>
       </section>
@@ -337,7 +420,7 @@ function App() {
           <ShieldAlert size={32} />
           <span>Hallazgos críticos</span>
           <strong>{hallazgosCriticos}</strong>
-          <p>SQL Injection e Inyección de comandos requieren prioridad alta.</p>
+          <p>SQL Injection e Inyección de comandos requieren corrección prioritaria.</p>
         </article>
 
         <article>
@@ -494,7 +577,7 @@ function App() {
             onClick={() => setVistaActiva('evidencia')}
           >
             <AlertTriangle size={18} />
-            Evidencia / impacto
+            Impacto y evidencia
           </button>
 
           <button
@@ -521,7 +604,7 @@ function App() {
             <article className="audit-main-card">
               <span>Qué se revisa</span>
               <h3>{seccionActiva.enfoque}</h3>
-              <p>{seccionActiva.impacto}</p>
+              <p>{seccionActiva.lectura}</p>
             </article>
 
             <article className="audit-assets-card">
@@ -533,22 +616,43 @@ function App() {
                 ))}
               </div>
             </article>
+
+            <article className="audit-decision-card">
+              <span>Lectura de auditoría</span>
+              <p>{seccionActiva.decision}</p>
+            </article>
           </section>
         )}
 
         {vistaActiva === 'evidencia' && (
-          <section className="audit-evidence-panel">
-            <article>
+          <section
+            className={
+              seccionActiva.evidencia
+                ? 'audit-evidence-panel'
+                : 'audit-evidence-panel no-image'
+            }
+          >
+            <article className="audit-impact-card">
               <span>Impacto para la empresa</span>
               <h3>{seccionActiva.impacto}</h3>
               <p>
-                Esta vista resume el valor del hallazgo sin obligar a leer todo
-                el desarrollo técnico. Para revisar el análisis completo, usa la
-                pestaña “Desarrollo completo”.
+                Esta vista resume la consecuencia principal del capítulo sin
+                obligar a leer todo el desarrollo técnico.
               </p>
             </article>
 
-            {seccionActiva.evidencia ? (
+            {seccionActiva.cvss && (
+              <article className="audit-cvss-card">
+                <span>{seccionActiva.cvss.version}</span>
+                <h3>
+                  {seccionActiva.cvss.puntaje} — {seccionActiva.cvss.severidad}
+                </h3>
+                <code>{seccionActiva.cvss.vector}</code>
+                <p>{seccionActiva.cvss.lectura}</p>
+              </article>
+            )}
+
+            {seccionActiva.evidencia && (
               <figure className="audit-evidence-preview">
                 <img
                   src={seccionActiva.evidencia}
@@ -559,9 +663,6 @@ function App() {
                   {seccionActiva.titulo}
                 </figcaption>
               </figure>
-            ) : (
-              <article className="audit-no-evidence">
-              </article>
             )}
           </section>
         )}

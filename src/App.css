@@ -1475,3 +1475,135 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* =============================== */
+/* LIMPIEZA AUDITORÍA INTERACTIVA */
+/* =============================== */
+
+.audit-executive-panel {
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: stretch;
+}
+
+.audit-decision-card {
+  grid-column: 1 / -1;
+  padding: 24px;
+  background: #111827;
+  color: white;
+  border: 5px solid #000000;
+  box-shadow: 10px 10px 0 #000000;
+}
+
+.audit-decision-card span {
+  display: block;
+  color: var(--audit-yellow);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.audit-decision-card p {
+  margin: 12px 0 0;
+  color: #d1fae5;
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 800;
+}
+
+.audit-evidence-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.audit-evidence-panel.no-image {
+  grid-template-columns: 1fr;
+}
+
+.audit-impact-card,
+.audit-cvss-card {
+  padding: 28px;
+  background: var(--paper);
+  border: 5px solid #000000;
+  box-shadow: 10px 10px 0 #000000;
+}
+
+.audit-impact-card span,
+.audit-cvss-card span {
+  display: block;
+  color: var(--wood-dark);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.audit-impact-card h3,
+.audit-cvss-card h3 {
+  margin: 12px 0;
+  color: var(--text);
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  font-weight: 950;
+}
+
+.audit-impact-card p,
+.audit-cvss-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 750;
+}
+
+.audit-cvss-card code {
+  display: block;
+  margin: 14px 0;
+  padding: 14px;
+  overflow-x: auto;
+  background: #111827;
+  color: #bbf7d0;
+  border: 3px solid #000000;
+  box-shadow: 5px 5px 0 #000000;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.audit-evidence-preview {
+  grid-column: 1 / -1;
+}
+
+.audit-evidence-panel.no-image .audit-impact-card,
+.audit-evidence-panel.no-image .audit-cvss-card {
+  grid-column: auto;
+}
+
+.audit-main-card p {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.audit-assets-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mc-document {
+  margin-top: 0;
+}
+
+@media (max-width: 1100px) {
+  .audit-executive-panel,
+  .audit-evidence-panel,
+  .audit-evidence-panel.no-image {
+    grid-template-columns: 1fr;
+  }
+
+  .audit-decision-card {
+    grid-column: auto;
+  }
+}
