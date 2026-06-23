@@ -79,6 +79,7 @@ const metricLabels = {
 const baseRisks = [
   {
     id: 'H3',
+    heatmapLabel: 'CMD',
     finding: 'Inyección de comandos',
     asset: 'Servidor web, sistema operativo y continuidad operacional',
     probability: 4,
@@ -101,6 +102,7 @@ const baseRisks = [
   },
   {
     id: 'H1',
+    heatmapLabel: 'SQL',
     finding: 'Inyección SQL',
     asset: 'Base de datos, contratos y datos financieros',
     probability: 4,
@@ -123,6 +125,7 @@ const baseRisks = [
   },
   {
     id: 'H2',
+    heatmapLabel: 'XSS',
     finding: 'XSS reflejado',
     asset: 'Sesión de usuario, navegador e interfaz del portal',
     probability: 3,
@@ -199,6 +202,14 @@ function getCvssSeverity(score) {
   if (score <= 6.9) return 'Media'
   if (score <= 8.9) return 'Alta'
   return 'Crítica'
+}
+
+function getCvssSeverityClass(severity) {
+  if (severity === 'Crítica') return 'cvss-critical'
+  if (severity === 'Alta') return 'cvss-high'
+  if (severity === 'Media') return 'cvss-medium'
+  if (severity === 'Baja') return 'cvss-low'
+  return 'cvss-none'
 }
 
 function getRiskScore(probability, impact) {
@@ -324,7 +335,7 @@ function RiskMatrixBoard() {
                       type="button"
                       className={`heatmap-cell ${getRiskClass(score)} ${
                         isSelected ? 'selected' : ''
-                      }`}
+                      } ${cellRisks.length > 0 ? 'has-finding' : ''}`}
                       onClick={() => {
                         if (cellRisks.length > 0) {
                           setSelectedRiskId(cellRisks[0].id)
@@ -333,12 +344,32 @@ function RiskMatrixBoard() {
                       title={
                         cellRisks.length > 0
                           ? cellRisks
-                              .map((risk) => `${risk.id}: ${risk.finding}`)
+                              .map((risk) => `${risk.heatmapLabel}: ${risk.finding}`)
                               .join(' | ')
                           : `Nivel de riesgo ${score}`
                       }
                     >
-                      <strong>{score}</strong>
+                      <div className="heatmap-cell-content">
+                        <strong className="heatmap-score">{score}</strong>
+
+                        {cellRisks.length > 0 && (
+                          <div className="heatmap-finding-tags">
+                            {cellRisks.map((risk) => (
+                              <span
+                                key={risk.id}
+                                className={risk.id === selectedRiskId ? 'active' : ''}
+                                title={risk.finding}
+                                onClick={(event) => {
+                                  event.stopPropagation()
+                                  setSelectedRiskId(risk.id)
+                                }}
+                              >
+                                {risk.heatmapLabel}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </button>
                   )
                 })}
@@ -478,7 +509,7 @@ function RiskMatrixBoard() {
             <div className="cvss-card-title">
               <span>{risk.id}</span>
               <h4>{risk.finding}</h4>
-              <strong>
+              <strong className={`cvss-severity-badge ${getCvssSeverityClass(risk.cvssSeverity)}`}>
                 CVSS {risk.cvss.baseScore} — {risk.cvssSeverity}
               </strong>
             </div>
