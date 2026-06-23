@@ -1385,3 +1385,575 @@ button {
   background: #ef4444;
   color: #ffffff;
 }
+
+/* ========================================================= */
+/* ANIMACIONES Y EFECTOS GENERALES - AUDITORÍA TERRANOVA */
+/* ========================================================= */
+
+/* Entrada general de la página */
+.mc-audit-page {
+  animation: auditPageFade 0.65s ease both;
+}
+
+/* Barra superior con entrada suave */
+.mc-topbar {
+  animation: topbarSlide 0.55s ease both;
+}
+
+/* Logo / bloque de marca con microinteracción */
+.mc-brand-block {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+}
+
+.mc-brand:hover .mc-brand-block {
+  transform: translate(-3px, -3px) rotate(-2deg);
+  box-shadow: 9px 9px 0 #000000;
+  filter: saturate(1.2);
+}
+
+/* Botones superiores con efecto táctil */
+.mc-topnav-item,
+.mc-mini-action,
+.mc-hero-actions button,
+.audit-filter,
+.mc-index-card {
+  will-change: transform;
+}
+
+.mc-topnav-item:active,
+.mc-mini-action:active,
+.mc-hero-actions button:active,
+.audit-filter:active,
+.mc-index-card:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 #000000;
+}
+
+/* Hero con brillo sutil */
+.mc-hero {
+  position: relative;
+  overflow: hidden;
+  animation: heroReveal 0.7s ease both;
+}
+
+.mc-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 35%,
+      rgba(255, 255, 255, 0.16) 50%,
+      transparent 65%,
+      transparent 100%
+    );
+  transform: translateX(-120%);
+  animation: heroLightSweep 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.mc-hero-text,
+.mc-hero-panel {
+  position: relative;
+  z-index: 1;
+}
+
+/* Panel ejecutivo flotante */
+.mc-hero-panel {
+  animation: panelFloat 4.2s ease-in-out infinite;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.mc-hero-panel:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 14px 14px 0 #000000;
+}
+
+/* Tarjetas principales con aparición escalonada */
+.audit-dashboard article,
+.mc-info-strip article,
+.mc-summary-row article {
+  animation: cardPop 0.55s ease both;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.audit-dashboard article:nth-child(1),
+.mc-info-strip article:nth-child(1),
+.mc-summary-row article:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.audit-dashboard article:nth-child(2),
+.mc-info-strip article:nth-child(2),
+.mc-summary-row article:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.audit-dashboard article:nth-child(3),
+.mc-info-strip article:nth-child(3),
+.mc-summary-row article:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.mc-info-strip article:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.audit-dashboard article:hover,
+.mc-info-strip article:hover,
+.mc-summary-row article:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #000000;
+  filter: saturate(1.08);
+}
+
+/* Índice con efecto de profundidad */
+.mc-index-section {
+  animation: sectionReveal 0.65s ease both;
+}
+
+.mc-index-card {
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.mc-index-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 62%,
+      transparent 100%
+    );
+  transform: translateX(-120%);
+  transition: transform 0.55s ease;
+  pointer-events: none;
+}
+
+.mc-index-card:hover::after,
+.mc-index-card.active::after {
+  transform: translateX(120%);
+}
+
+.mc-index-card:hover,
+.mc-index-card.active {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #000000;
+}
+
+/* Encabezado del capítulo */
+.mc-document-header {
+  animation: documentHeaderReveal 0.55s ease both;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mc-document-header:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 #000000;
+}
+
+/* Documento principal */
+.principal-document {
+  animation: documentReveal 0.6s ease both;
+}
+
+.principal-document-header {
+  animation: cardPop 0.55s ease both;
+}
+
+/* Bloques Markdown con entrada suave */
+.markdown-view h1,
+.markdown-view h2,
+.markdown-view h3,
+.markdown-view p,
+.markdown-view ul,
+.markdown-view ol,
+.markdown-view pre,
+.table-wrapper,
+.evidence-figure {
+  animation: markdownFadeUp 0.5s ease both;
+}
+
+.markdown-view h2 {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.markdown-view h2:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 #000000;
+}
+
+/* Tablas con mejor interacción */
+.markdown-view tr,
+.risk-priority-table tr {
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.markdown-view tr:hover td,
+.risk-priority-table tr:hover td {
+  background: #fef3c7;
+}
+
+/* Imágenes de evidencia */
+.evidence-figure,
+.audit-evidence-preview {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
+}
+
+.evidence-figure:hover,
+.audit-evidence-preview:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #000000;
+  filter: saturate(1.05);
+}
+
+/* Matriz de riesgo: interacción más atractiva */
+.risk-board-intro,
+.heatmap-section,
+.selected-risk-panel,
+.risk-table-box,
+.cvss-section {
+  animation: matrixBlockReveal 0.6s ease both;
+}
+
+.heatmap-cell {
+  overflow: hidden;
+}
+
+.heatmap-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.32),
+      transparent 48%
+    );
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.heatmap-cell:hover::before,
+.heatmap-cell.selected::before {
+  opacity: 1;
+}
+
+.heatmap-cell.selected {
+  animation: selectedRiskPulse 1.8s ease-in-out infinite;
+}
+
+/* Etiquetas de hallazgos dentro del mapa */
+.heatmap-finding-tags span {
+  animation: tagAppear 0.32s ease both;
+}
+
+.heatmap-finding-tags span:hover,
+.heatmap-finding-tags span.active {
+  animation: tagActivePulse 1.3s ease-in-out infinite;
+}
+
+/* Cards CVSS */
+.cvss-card {
+  animation: cvssCardReveal 0.55s ease both;
+}
+
+.cvss-card:nth-of-type(1) {
+  animation-delay: 0.05s;
+}
+
+.cvss-card:nth-of-type(2) {
+  animation-delay: 0.12s;
+}
+
+.cvss-card:nth-of-type(3) {
+  animation-delay: 0.19s;
+}
+
+.cvss-severity-badge,
+.risk-pill {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.16s ease;
+}
+
+.cvss-severity-badge:hover,
+.risk-pill:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000000;
+  filter: saturate(1.15);
+}
+
+/* Footer con animación sutil */
+.audit-footer {
+  animation: footerReveal 0.65s ease both;
+}
+
+.audit-footer-content {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.audit-footer-content:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 #000000;
+}
+
+.audit-footer-github {
+  position: relative;
+  overflow: hidden;
+}
+
+.audit-footer-github::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
+  transform: translateX(-120%);
+  transition: transform 0.55s ease;
+}
+
+.audit-footer-github:hover::after {
+  transform: translateX(120%);
+}
+
+/* Animaciones */
+@keyframes auditPageFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes topbarSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroLightSweep {
+  0%,
+  45% {
+    transform: translateX(-120%);
+  }
+
+  65% {
+    transform: translateX(120%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes panelFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes cardPop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes documentHeaderReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes documentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes markdownFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes matrixBlockReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes selectedRiskPulse {
+  0%,
+  100% {
+    outline-color: #111827;
+    filter: saturate(1);
+  }
+
+  50% {
+    outline-color: var(--audit-yellow);
+    filter: saturate(1.28);
+  }
+}
+
+@keyframes tagAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tagActivePulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.13);
+  }
+}
+
+@keyframes cvssCardReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes footerReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accesibilidad: respeta usuarios con reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
